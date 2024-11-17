@@ -13,10 +13,11 @@
     --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
 
 }
-body{
+
+body {
     background-color: #100403;
-        margin: 0;
-        padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -66,7 +67,7 @@ nav .nav-content {
     align-items: center;
     padding: 1em;
     /* Adds padding around nav items */
-    background-color:#260502;
+    background-color: #260502;
     /* White background for nav items */
     box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.1);
     /* Optional shadow */
@@ -131,13 +132,16 @@ h2 {
     flex-direction: column;
     color: var(--bodyTextColorWhite);
 }
+
 .cs-title {
     max-width: 43.75rem;
-    
-    margin: 0.5rem 0 1rem 0; /* Combined consistent margins */
+
+    margin: 0.5rem 0 1rem 0;
+    /* Combined consistent margins */
     color: var(--headerColor);
     position: relative;
-    padding: 30px; /* Retained the padding from the first definition */
+    padding: 30px;
+    /* Retained the padding from the first definition */
 }
 
 
@@ -166,21 +170,63 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the video covers the section */
-    z-index: -1; /* Places it behind the content */
-  }
-  
-  #hero-229 {
+    object-fit: cover;
+    /* Ensures the video covers the section */
+    z-index: -1;
+    /* Places it behind the content */
+}
+
+#hero-229 {
     position: relative;
     width: 100%;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Ensures no scrollbars appear */
-  }
-  
-  .cs-container {
+    height: 100vh;
+    /* Full viewport height */
+    overflow: hidden;
+    /* Ensures no scrollbars appear */
+}
+
+.cs-container {
     position: relative;
-    z-index: 1; /* Keeps content above the video */
-  }
+    z-index: 1;
+    /* Keeps content above the video */
+}
+
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 18px;
+        /* Decreased for better fit */
+        margin: 0.3rem 0;
+    }
+
+    h2 {
+        font-size: 24px;
+        /* Smaller subheading size */
+        margin: 0.5rem 0;
+    }
+
+    .cs-title {
+        font-size: 28px;
+        /* Title reduced for small screens */
+        margin: 1rem 0;
+    }
+
+    .nav-content a {
+        font-size: 14px;
+        /* Compact navigation links */
+    }
+
+    .namecont {
+        font-size: 18px;
+        /* Reduced main content size */
+    }
+
+    .cs-button-solid,
+    .cs-button-transparent {
+        font-size: 12px;
+        /* Smaller buttons */
+    }
+}
 
 
 @media only screen and (max-width: 600px) {
@@ -234,7 +280,7 @@ h2 {
     }
 
     #hero-229 .cs-container:before {
-    
+
         height: 100%;
         background: linear-gradient(to bottom, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%);
         opacity: 1;
@@ -284,7 +330,7 @@ h2 {
         width: 100%;
         margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
         margin-bottom: clamp(2.5rem, 4vw, 3rem);
-        color: rgb(200 , 123, 16);
+        color: rgb(200, 123, 16);
     }
 
     #hero-229 .cs-button-solid {
@@ -296,8 +342,10 @@ h2 {
         min-width: 9.375rem;
         margin: 0;
         padding: 0 3rem;
-        background-color: #FFD700; /* Replaced brown with yellow */
-        color: #0d604a; /* Adjusted text color for contrast */
+        background-color: #FFD700;
+        /* Replaced brown with yellow */
+        color: #0d604a;
+        /* Adjusted text color for contrast */
         border: none;
         display: inline-block;
         position: relative;
@@ -324,7 +372,8 @@ h2 {
 
     #hero-229 .cs-button-solid:hover:before {
         width: 100%;
-        background: #FFD700; /* Replaced brown with yellow */
+        background: #FFD700;
+        /* Replaced brown with yellow */
 
     }
 
@@ -378,7 +427,7 @@ h2 {
     }
 
     #hero-229 .cs-container:after {
- 
+
         height: 100%;
         background: linear-gradient(to bottom, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%);
         opacity: 1;
@@ -493,7 +542,7 @@ h2 {
         box-sizing: border-box;
         grid-column: span 12;
         grid-row: span 1;
-        
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -640,10 +689,10 @@ h2 {
     font-weight: normal;
 }
 
-.h6mt-3mb-1{
+.h6mt-3mb-1 {
     color: whitesmoke;
     font-family: 'Dancing Script', cursive;
-    size:20px;
+    size: 20px;
 }
 
 .h6mt-3mb-1p {
@@ -901,7 +950,7 @@ body {
     text-align: inherit;
     max-width: 43.75rem;
     margin: 0 0 1rem 0;
-    color: rgb(200 , 123, 16);
+    color: rgb(200, 123, 16);
     position: relative;
 }
 
@@ -1485,30 +1534,34 @@ body {
 #contact-me {
     padding: 100px;
     text-align: center;
-  }
-  
-  .contact-container h2 {
+}
+
+.contact-container h2 {
     font-size: var(--headerFontSize);
     margin-bottom: 1rem;
     color: var(--primary);
-  }
-  
-  .contact-list {
-    list-style: none; /* Removes bullet points */
+}
+
+.contact-list {
+    list-style: none;
+    /* Removes bullet points */
     padding: 0;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the list */
+    align-items: center;
+    /* Centers the list */
     gap: 1rem;
-    max-width: 300px; /* Restricts the width */
-  }
-  
-  .contact-list li {
-    width: 100%; /* Ensures full width for hover effects */
-  }
-  
-  .contact-list a {
+    max-width: 300px;
+    /* Restricts the width */
+}
+
+.contact-list li {
+    width: 100%;
+    /* Ensures full width for hover effects */
+}
+
+.contact-list a {
     text-decoration: none;
     color: #b74848;
     display: flex;
@@ -1519,15 +1572,17 @@ body {
     border: 2px solid var(--primaryLight);
     border-radius: 8px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    width: 100%; /* Makes links occupy full width of the container */
+    width: 100%;
+    /* Makes links occupy full width of the container */
     text-align: center;
-  }
-  
-  .contact-list a:hover {
+}
+
+.contact-list a:hover {
     background-color: var(--primary);
-    color: #c87b10; /* High contrast for hover */
-  }
-  
-  .contact-list i {
+    color: #c87b10;
+    /* High contrast for hover */
+}
+
+.contact-list i {
     font-size: 1.5rem;
-  }
+}
