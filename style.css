@@ -466,71 +466,51 @@ body {
 .contact-list i {
     font-size: 1.5rem
 }
-
 /* General styles for larger screens */
 @media only screen and (min-width: 48rem) {
-    #hero-229 {
-        padding: 0 clamp(2rem, 5vw, 2.5rem);
-    }
-
-    #hero-229 .cs-container:after {
-        background: linear-gradient(to bottom, #fafbfc00 0, #fafbfc80 100%);
-        height: 100%;
-        opacity: 1;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
     #hero-229 .cs-title {
-        font-size: 100px; /* Default font size for larger screens */
-    }
-
-    #hero-229 h1, #hero-229 h2 {
-        font-size: 2.5rem; /* Larger font for headings */
+        font-size: 100px; /* Default size for large screens */
     }
 }
 
-/* Responsive styles for medium screens (e.g., tablets) */
+/* Smaller screens */
 @media only screen and (max-width: 48rem) {
-    #hero-229 .cs-container:after {
-        background: linear-gradient(to bottom, #fafbfc00 0, #fafbfc50 100%);
-        opacity: 0.8; /* Slightly reduce gradient opacity */
-    }
-
     #hero-229 .cs-title {
-        font-size: 60px; /* Reduce title size for smaller screens */
-    }
-
-    #hero-229 h1, #hero-229 h2 {
-        font-size: 2rem; /* Adjust heading sizes */
+        font-size: 60px; /* Reduce size for tablets and small devices */
     }
 }
 
-/* Responsive styles for smaller screens (e.g., phones) */
+/* Very small screens (e.g., phones) */
 @media only screen and (max-width: 390px) {
     #hero-229 .cs-title {
-        font-size: 45px; /* Further reduce title size for smaller phones */
-    }
-
-    #hero-229 h1, #hero-229 h2 {
-        font-size: 1.5rem; /* Reduce heading size for smaller screens */
+        font-size: 25 px; /* Further reduce size for smaller phones */
     }
 }
 
-/* Responsive styles for very small screens (e.g., iPhone SE, 320px width) */
+/* Narrowest screens (e.g., iPhone SE, 320px width) */
 @media only screen and (max-width: 320px) {
     #hero-229 .cs-title {
-        font-size: 35px; /* Minimal size for very narrow screens */
-    }
-
-    #hero-229 h1, #hero-229 h2 {
-        font-size: 1.2rem; /* Smaller font for headings */
+        font-size: 25 px; /* Minimum size for very narrow screens */
     }
 }
 
+@media only screen and (max-width: 200px) {
+    #hero-229 .cs-title {
+        font-size: 22px; /* Minimum size for very narrow screens */
+    }
+}
 
+@media only screen and (max-width: 150px) {
+    #hero-229 .cs-title {
+        font-size: 15px; /* Minimum size for very narrow screens */
+    }
+}
 
+@media only screen and (max-width: 100px) {
+    #hero-229 .cs-title {
+        font-size: 10px; /* Minimum size for very narrow screens */
+    }
+}
 
 /*media query for the 4 tiles side by side for education and research and High School names */
 @media only screen and (min-width: 0rem) {
