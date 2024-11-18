@@ -82,7 +82,6 @@ main {
 
 .namecont {
     display: flex;
-    font-size: 50px
 }
 
 .namecontL {
@@ -473,12 +472,20 @@ body {
     #hero-229 .cs-title {
         font-size: 100px; /* Large size for desktop screens */
     }
+
+    #hero-229 .namecontL h1 {
+        font-size: 70px; /* Large size for 'Hello' and 'This is' */
+    }
 }
 
 /* Smaller screens */
 @media only screen and (max-width: 48rem) {
     #hero-229 .cs-title {
         font-size: 60px; /* Smaller size for tablets */
+    }
+
+    #hero-229 .namecontL h1 {
+        font-size: 50px; /* Smaller size for 'Hello' and 'This is' */
     }
 }
 
@@ -487,6 +494,10 @@ body {
     #hero-229 .cs-title {
         font-size: 35px; /* Reduce size for smaller phones */
     }
+
+    #hero-229 .namecontL h1 {
+        font-size: 30px; /* Reduce size for 'Hello' and 'This is' */
+    }
 }
 
 /* Narrowest screens (e.g., iPhone SE, 320px width) */
@@ -494,7 +505,14 @@ body {
     #hero-229 .cs-title {
         font-size: 25px; /* Minimal size for very narrow screens */
     }
+
+    #hero-229 .namecontL h1 {
+        font-size: 20px; /* Minimal size for 'Hello' and 'This is' */
+    }
 }
+
+
+
 
 
 /*media query for the 4 tiles side by side for education and research and High School names */
@@ -691,6 +709,7 @@ body {
         margin: auto;
         max-width: 80rem;
         width: 100%;
+        padding: 2rem .1rem; /* Left and right padding for the container */
     }
 
     /* Picture Styling */
