@@ -471,52 +471,30 @@ body {
 /* General styles for larger screens */
 @media only screen and (min-width: 48rem) {
     #hero-229 .cs-title {
-        font-size: 100px; /* Default size for large screens */
+        font-size: 100px; /* Large size for desktop screens */
     }
 }
 
 /* Smaller screens */
 @media only screen and (max-width: 48rem) {
     #hero-229 .cs-title {
-        font-size: 60px; /* Reduce size for tablets and small devices */
+        font-size: 60px; /* Smaller size for tablets */
     }
 }
 
 /* Very small screens (e.g., phones) */
 @media only screen and (max-width: 390px) {
     #hero-229 .cs-title {
-        font-size: 45px; /* Further reduce size for smaller phones */
+        font-size: 35px; /* Reduce size for smaller phones */
     }
 }
 
 /* Narrowest screens (e.g., iPhone SE, 320px width) */
 @media only screen and (max-width: 320px) {
     #hero-229 .cs-title {
-        font-size: 35px; /* Minimum size for very narrow screens */
+        font-size: 25px; /* Minimal size for very narrow screens */
     }
 }
-
-/* Narrowest screens (e.g., iPhone SE, 320px width) */
-@media only screen and (max-width: 290px) {
-    #hero-229 .cs-title {
-        font-size: 20px; /* Minimum size for very narrow screens */
-    }
-}
-/* Narrowest screens (e.g., iPhone SE, 320px width) */
-@media only screen and (max-width: 250px) {
-    #hero-229 .cs-title {
-        font-size: 15px; /* Minimum size for very narrow screens */
-    }
-}
-
-/* Narrowest screens (e.g., iPhone SE, 320px width) */
-@media only screen and (max-width: 150px) {
-    #hero-229 .cs-title {
-        font-size: 10px; /* Minimum size for very narrow screens */
-    }
-}
-
-
 
 
 /*media query for the 4 tiles side by side for education and research and High School names */
@@ -530,7 +508,9 @@ body {
         position: relative;
         z-index: 10;
     }
-
+    #hero-229 .cs-title {
+        font-size: clamp(25px, 5vw, 100px); /* Dynamically adjusts size between 25px and 100px */
+    }
     #services-1354 {
         --sectionPadding: clamp(1rem, 1.5vw, 1.5rem) 1rem;
     }
@@ -1111,3 +1091,4 @@ body {
         max-width: 90%
     }
 }
+
