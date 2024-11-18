@@ -508,7 +508,19 @@ body {
 
 @media only screen and (max-width: 100px) {
     #hero-229 .cs-title {
+        font-size: 13px; /* Minimum size for very narrow screens */
+    }
+}
+
+@media only screen and (max-width: 75) {
+    #hero-229 .cs-title {
         font-size: 10px; /* Minimum size for very narrow screens */
+    }
+}
+
+@media only screen and (max-width: 50) {
+    #hero-229 .cs-title {
+        font-size: 8px; /* Minimum size for very narrow screens */
     }
 }
 
