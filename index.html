@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
     <style>
         .project-card {
             transition: box-shadow 0.4s ease;
@@ -77,12 +78,12 @@
 
         #navbar {
             position: fixed;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 10;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 18px;
             align-items: center;
             padding: 12px;
@@ -109,13 +110,15 @@
         #navbar a::after {
             content: attr(data-label);
             position: absolute;
-            left: 28px;
             color: white;
             font-size: 0.9rem;
             opacity: 0;
             transition: opacity 0.3s ease;
             white-space: nowrap;
             pointer-events: none;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         #navbar a.active::after {
@@ -132,9 +135,9 @@
             padding: 0;
             margin: 0;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            gap: 14px;
+            gap: 32px;
         }
 
         .snap-container {
@@ -246,6 +249,12 @@
             color: #e6b800;
         }
 
+        .stalinist-one-regular {
+          font-family: "Stalinist One", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+
         .outfit {
           font-family: "Outfit", sans-serif;
           font-optical-sizing: auto;
@@ -336,9 +345,12 @@
     <!-- Page Content -->
     <div class="snap-container">
         <div class="section" id="section1">
-            <h1 class="outfit">Hello, I'm <span class="accent">Khushi</span>.</h1>
+            <h1 class="stalinist-one-regular">Hello, I'm <span class="accent">Khushi</span>.</h1>
             <h2 class="outfit">I'm a full stack developer & AI engineer.</h2>
-            <a href="#section3" class="cta-button">View my work ↓</a>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+              <a href="#section3" class="cta-button">View my work ↓</a>
+              <a href="Khushi_Kaushik 07:21:2025.pdf" class="cta-button" download>Download Résumé ↓</a>
+            </div>
         </div>
         <div class="section" id="section2">
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
