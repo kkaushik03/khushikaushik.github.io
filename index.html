@@ -2,496 +2,631 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khushi Kaushik</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <title>Khushi Kaushik Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        .project-card {
+            transition: box-shadow 0.4s ease;
+            will-change: box-shadow;
+        }
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        .project-card:hover {
+            box-shadow: 0 0 35px 6px rgba(230, 184, 0, 0.8) !important;
+            transform: scale(1.02);
+        }
+
+        .experience-card {
+            background: rgba(10, 10, 10, 0.12);
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 260px;
+            height: 580px;
+            overflow-y: auto;
+        }
+
+        .experience-card:hover {
+            box-shadow: 0 0 30px 8px rgba(230, 184, 0, 0.6);
+            transform: scale(1.05);
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-weight: 400;
+            background: #000;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            vertical-align: bottom;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+            z-index: 0;
+        }
+
+        #stats {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+        }
+
+        #navbar {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            padding: 12px;
+            background: transparent;
+        }
+
+        #navbar a {
+            width: 16px;
+            height: 16px;
+            background-color: #aaa;
+            border-radius: 50%;
+            display: block;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        #navbar a.active {
+            background-color: red;
+            transform: scale(2.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #navbar a::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 28px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        #navbar a.active::after {
+            opacity: 1;
+        }
+
+        #navbar a:hover {
+            background-color: #e6b800;
+            transform: scale(2);
+        }
+
+        #navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+            box-shadow: none;
+        }
+
+        #section1::before,
+        #section2::before,
+        #section3::before,
+        #section4::before,
+        #section5::before,
+        #section6::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to right, #e6b800 0%, transparent 100%);
+            opacity: 0.25;
+            z-index: 1;
+        }
+
+        #section1::after,
+        #section2::after,
+        #section3::after,
+        #section4::after,
+        #section5::after,
+        #section6::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to left, #e6b800 0%, transparent 100%);
+            opacity: 0.25;
+            z-index: 1;
+        }
+
+        .glass {
+            background: rgba(10, 10, 10, 0.12);
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 700px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+            z-index: 2;
+        }
+
+        .glass p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        ul li {
+            margin: 0.5rem 0;
+        }
+
+        .intro-glass {
+            background: none;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        #section1 h1 {
+            font-size: 5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        #section1 h2 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            color: white;
+        }
+
+        .accent {
+            color: #e6b800;
+        }
+
+        .outfit {
+          font-family: "Outfit", sans-serif;
+          font-optical-sizing: auto;
+          font-style: normal;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #e6b800;
+            border: 2px solid #e6b800;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #e6b800;
+            color: black;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            text-align: left;
+            color: white;
+            font-size: 1.1rem;
+            padding: 20px;
+        }
+
+        .skills-grid div {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(230, 184, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .skills-grid div:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px 6px rgba(230, 184, 0, 0.5);
+        }
+
+        .skills-grid strong {
+            color: #e6b800;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .contact-links a {
+            color: white;
+            text-decoration: underline;
+            font-size: 1.2rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: #e6b800;
+            text-shadow: 0 0 10px #e6b800;
+        }
+
+        .glass:hover {
+            box-shadow: 0 0 30px 6px rgba(230, 184, 0, 0.4);
+            transform: scale(1.01);
+        }
+    </style>
 </head>
 
 <body>
-  <!-- ============================================ -->
-  <!--              Main description area           -->
-  <!-- ============================================ -->
-  <!-- Fallback background image -->
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
 
-  <section id="hero-229" class="hero-section">
-    <video autoplay muted loop playsinline class="video-bg">
-      <source src="8mb.video-7VA-6dmVNhS7.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="cs-container">
-      <div class="cs-flex-group">
-        <nav>
-          <div class="logo">K.</div>
-          <div class="nav-content">
-            <a href="#skills-section">Skills</a>
-            <a href="#projects-section">Projects</a>
-            <a href="#contact-me">Contact</a>
-          </div>
-        </nav>
-        <div class="namecont">
-          <div class="namecontL">
-            <h1>Hello</h1>
-          </div>
-          <div class="namecontL">
-            <h1>This is</h1>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="#section1" class="active" data-label="Introduction"></a></li>
+            <li><a href="#section2" data-label="About Me"></a></li>
+            <li><a href="#section3" data-label="Projects"></a></li>
+            <li><a href="#section4" data-label="Skills"></a></li>
+            <li><a href="#section5" data-label="Experience"></a></li>
+            <li><a href="#section6" data-label="Contact"></a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="snap-container">
+        <div class="section" id="section1">
+            <h1 class="outfit">Hello, I'm <span class="accent">Khushi</span>.</h1>
+            <h2 class="outfit">I'm a full stack developer & AI engineer.</h2>
+            <a href="#section3" class="cta-button">View my work ↓</a>
+        </div>
+        <div class="section" id="section2">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
+  <div style="flex: 1; min-width: 200px; max-width: 280px;">
+    <img src="updated portfolio.jpg" alt="Khushi" style="width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(230, 184, 0, 0.6);" />
+  </div>
+  <div class="glass" style="flex: 2; min-width: 300px; height: 300px; padding: 80px 60px;">
+    <p style="font-size: 1.2rem;">
+      <span style="font-size: 1.2rem; font-weight: 600;">I'm a Computer Science grad student at UCSD (MS CS + MicroMBA), and I graduated Magna Cum Laude from CSUF with a BS in CS.</span><br><br>
+      <span style="font-size: 1.2rem;">I’m deeply passionate about data engineering, machine learning, and full-stack development. I love building intelligent, scalable systems that solve real-world problems—from deploying ML pipelines to crafting intuitive user interfaces. My mission is to merge data-driven insights with software craftsmanship to create technology that works smart and feels seamless.</span>
+    </p>
+  </div>
+</div>
+        </div>
+        <div class="section" id="section3" style="padding-bottom: 20px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1100px;">
+            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('drone.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+                <h3 style="margin: 0; color: #e6b800;">Altivue</h3>
+                <p style="margin: 5px 0 10px; color: #ffffff;">AI-powered drone with YOLOv5 & RAG for safer pathing.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A smart drone that can "see" and avoid obstacles using AI.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Useful in search & rescue, agriculture, and surveillance.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> YOLOv5, Python, Computer Vision, RAG.</p>
+              </div>
+            </div>
+            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('biomarker.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+                <h3 style="margin: 0; color: #e6b800;">Biomarker Predictor</h3>
+                <p style="margin: 5px 0 10px; color: #ffffff;">AI for neuro-cognitive decline post cardiac surgery (AUROC 0.86).</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> Predicts if a patient might develop brain issues after heart surgery.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Hospitals for post-op patient care planning.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> AUROC, Scikit-learn, Python, SHAP.</p>
+              </div>
+            </div>
+            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('stocks.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+                <h3 style="margin: 0; color: #e6b800;">Stock Forecaster</h3>
+                <p style="margin: 5px 0 10px; color: #ffffff;">LSTM + XGBoost ensemble for S&amp;P 500 trends (70% accuracy).</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A model that guesses stock market trends using AI.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Finance tools, investor dashboards.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LSTM, XGBoost, Python, Time Series.</p>
+              </div>
+            </div>
+            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('fractran.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+                <h3 style="margin: 0; color: #e6b800;">FRACTRAN Research</h3>
+                <p style="margin: 5px 0 10px; color: #ffffff;">Computed √2 with prime-state FRACTRAN; published on arXiv.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A math project proving irrational numbers using prime sequences.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Research labs, theoretical computing studies.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> Number theory, Math modeling, Python.</p>
+              </div>
+            </div>
+            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('llm.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+                <h3 style="margin: 0; color: #e6b800;">LLM Tooling (In Progress)</h3>
+                <p style="margin: 5px 0 10px; color: #ffffff;">Building interfaces and pipelines for interacting with large language models.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A toolkit to integrate and experiment with LLMs efficiently.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Dev platforms, AI product prototyping, GenAI experimentation.</p>
+                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LLMs, Python, Prompt Engineering, RAG, LangChain.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div style="display: flex; width:100vw">
-          <div style="padding: 60px;">
-          </div>
-          <h2 class="cs-title">Khushi Kaushik</h2>
+        <div class="section" id="section4">
+            <div class="skills-grid">
+              <div><strong>Programming Languages</strong><br>JavaScript, TypeScript, Python, SQL, C++, C#, R, Java, HTML, CSS</div>
+              <div><strong>AI Tools & Frameworks</strong><br>TensorFlow, PyTorch, Scikit-learn, Keras, SHAP, YOLOv5, RAG, GPT-J, LLaMA, Mistral</div>
+              <div><strong>Developer Tools</strong><br>Git, GitHub, VS Code, AWS, Jupyter, Flask, FastAPI, SQLite, MySQL, Databricks, Linux</div>
+              <div><strong>Front-End</strong><br>React, Next.js, Bootstrap, Responsive Design, UI/UX Principles</div>
+              <div><strong>Back-End</strong><br>.NET, Flask, Node.js, MongoDB, RESTful APIs</div>
+              <div><strong>Concepts</strong><br>Object-Oriented Programming, Full-Stack Development, Cross-browser Compatibility, Version Control, Relational Databases</div>
+              <div><strong>Focus Areas</strong><br>User-Focused Design, AI Agent Workflows, LLM Integration</div>
+              <div><strong>Cloud & DevOps</strong><br>Docker, Kubernetes, GitHub Actions, GitLab CI, REST APIs, gRPC, Postman, Terraform</div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================ -->
-  <!--             Side By Side Quadruplet          -->
-  <!-- ============================================ -->
-
-  <section id="RTsbst-459">
-    <div class="cs-container">
-      <div class="cs-content">
-        <span class="cs-topper"></span>
-        <h2 class="cs-title2">Hi! this is Khushi! </h2>
-        <p class="cs-text2">
-          A 3rd-year computer science major at California State University, Fullerton, with experience in data
-          science, machine learning, and cybersecurity. I am dedicated to building my technical skills by
-          engaging with faculty-led research and building exploratory software projects that aim to challenge
-          the issues of today.
-
-          As an Asian American woman in tech, I am a firm believer in organizations whose purpose is to
-          support underrepresented groups and using my leadership roles to encourage my peers to transcend
-          societal barriers.
-        </p>
-        <a href="resume.pdf" class="cs-button-solid" target="_blank">Curriculum Vitae</a>
-      </div>
-      <picture class="cs-picture">
-        <source media="(max-width: 250)" src="introimg.JPG">
-        <source media="(min-width: 200px)" src="introimg.JPG">
-        <img aria-hidden="true" loading="lazy" decoding="async" src="introimg.JPG" alt="grass" width="200" height="340">
-      </picture>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!--                   Something about Me                -->
-  <!-- ============================================ -->
-
-  <section id="services-1354">
-    <div class="cs-container">
-      <div class="cs-content">
-        <div class="cs-container">
-          <h2 class="cs-title2">Education and Experience</h2>
+        <div class="section" id="section5">
+        
+            <div style="display: flex; justify-content: center; align-items: stretch; gap: 20px; flex-wrap: nowrap;">
+              <div class="experience-card">
+                <h3 style="color: #e6b800;">LLM Prompt Optimization</h3>
+                <ul>
+                  <li style="color: #ffffff;"><strong>What I did:</strong> Reduced latency 15%+ across GPT-J, LLaMA using prompt compression & token efficiency strategies.</li>
+                  <li style="color: #ffffff;"><strong>Skills used:</strong> Prompt Engineering, LLMs, Tokenization</li>
+                  <li style="color: #ffffff;"><strong>Impact:</strong> Enabled faster GenAI response in RAG-based apps.</li>
+                  <li style="color: #ffffff;"><strong>Tools:</strong> Python, GPT-J, LLaMA</li>
+                  <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
+                  <li style="color: #ffffff;"><strong>Timeline:</strong> Jan 2024 – Mar 2024</li>
+                </ul>
+              </div>
+              <div class="experience-card">
+                <h3 style="color: #e6b800;">CSUF Teaching Assistant</h3>
+                <ul>
+                  <li style="color: #ffffff;"><strong>What I did:</strong> Tutored 1,500+ students in Python & SQL. Led labs, created exam prep, and mentored capstones.</li>
+                  <li style="color: #ffffff;"><strong>Skills used:</strong> Python, SQL, Teaching, Curriculum Design</li>
+                  <li style="color: #ffffff;"><strong>Impact:</strong> Improved average lab scores by 12%</li>
+                  <li style="color: #ffffff;"><strong>Tools:</strong> Zoom, Python, SQL IDEs</li>
+                  <li style="color: #ffffff;"><strong>Environment:</strong> Academic, undergrad labs</li>
+                  <li style="color: #ffffff;"><strong>Timeline:</strong> Aug 2021 – May 2023</li>
+                </ul>
+              </div>
+              <div class="experience-card">
+                <h3 style="color: #e6b800;">SoCal Research</h3>
+                <ul>
+                  <li style="color: #ffffff;"><strong>What I did:</strong> Predicted earthquake column drift with R² = 0.94 using ML models and regression.</li>
+                  <li style="color: #ffffff;"><strong>Skills used:</strong> Python, Scikit-learn, Regression, Sensor Data</li>
+                  <li style="color: #ffffff;"><strong>Impact:</strong> Boosted accuracy of seismic drift predictions by 18%</li>
+                  <li style="color: #ffffff;"><strong>Tools:</strong> Jupyter, Scikit-learn, Pandas</li>
+                  <li style="color: #ffffff;"><strong>Environment:</strong> Collaborative lab (6-person team)</li>
+                  <li style="color: #ffffff;"><strong>Timeline:</strong> Jun 2023 – Sep 2023</li>
+                </ul>
+              </div>
+              <div class="experience-card">
+                <h3 style="color: #e6b800;">FRACTRAN Math Research</h3>
+                <ul>
+                  <li style="color: #ffffff;"><strong>What I did:</strong> Proved √2 using a prime-state FRACTRAN machine. Published findings on arXiv.</li>
+                  <li style="color: #ffffff;"><strong>Skills used:</strong> Number Theory, Math Modeling, Python</li>
+                  <li style="color: #ffffff;"><strong>Impact:</strong> Presented findings at World's Largest Math Conference (JMM)</li>
+                  <li style="color: #ffffff;"><strong>Tools:</strong> Python, LaTeX, arXiv</li>
+                  <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
+                  <li style="color: #ffffff;"><strong>Timeline:</strong> Dec 2023 – Feb 2024</li>
+                </ul>
+              </div>
+            </div>
         </div>
-
-      </div>
-      <ul class="cs-card-group">
-
-
-
-        <li class="cs-item">
-          <h3 class="cs-link">
-            <h3 class="cs-h3"><span class="cs-span"
-                style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">High
-                School:</span>
-              <p style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">Valencia
-                High School</p>
-            </h3>
-          </h3>
-          <picture class="cs-background">
-            <source media="(max-width: 600px)" srcset="sample0.png">
-            <source media="(min-width: 601px)" srcset="sample0.png">
-            <img decoding="async" src="sample0.png" alt="construction" width="305" height="305" aria-hidden="true">
-          </picture>
-        </li>
-
-
-
-
-        <li class="cs-item">
-          <h3class="cs-link">
-            <h3 class="cs-h3"><span class="cs-span"
-                style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">University:</span>
-              <p style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;"> California
-                State University, Fullerton
-              </p>
-            </h3>
-            <picture class="cs-background">
-              <source media="(max-width: 600px)" srcset="sample2.jpg">
-              <source media="(min-width: 601px)" srcset="sample2.jpg">
-              <img decoding="async" srcset="sample2.jpg" alt="construction" width="305" height="305" aria-hidden="true">
-            </picture>
-        </li>
-
-
-
-        <li class="cs-item">
-          <h3 class="cs-link">
-            <h3 class="cs-h3"><span class="cs-span"
-                style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">Major/
-                Minor:</span>
-
-
-
-              <p style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">
-
-                Computer Science Major Math Minor
-
-              </p>
-
-            </h3>
-          </h3>
-          <picture class="cs-background">
-            <source media="(max-width: 600px)" srcset="sample4.jpeg">
-            <source media="(min-width: 601px)" srcset="sample4.jpeg">
-            <img decoding="async" srcset="sample4.jpeg" alt="construction" width="305" height="305" aria-hidden="true">
-          </picture>
-        </li>
-
-
-
-
-        <li class="cs-item">
-          <h3 class="cs-link">
-            <h3 class="cs-h3"><span class="cs-span"
-                style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">Interests</span>
-
-
-              <p style="color:rgb(38, 9, 9); font-family: 'Times New Roman', Times, serif; font-size: 40px;">
-
-
-                Theory of Computation/ Data Science
-
-              </p>
-            </h3>
-          </h3>
-          <picture class="cs-background">
-            <source media="(max-width: 600px)" srcset="sample5.jpg">
-            <source media="(min-width: 601px)" srcset="sample5.jpg">
-            <img decoding="async" srcset="sample5.jpg" alt="construction" width="305" height="305" aria-hidden="true">
-          </picture>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-
-
-
-  <section id="services-1354">
-    <div class="cs-container">
-      <h2 class="cs-title2">High School</h2>
-    </div>
-    <div class="container">
-      <!--Row 1-->
-      <div class="row">
-        <div class="col">
-          <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">April 2020</p>
-                <p class="h6mt-3mb-1p">Founded Funds for Ashes</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">April 2020</p>
-                <p class="h6mt-3mb-1p">Tutored Data Structures in Java Elite Academy</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">January 2022</p>
-                <p class="h6mt-3mb-1p">Barista at Kung Fu Tea</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2010">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">June 2022</p>
-                <p class="h6mt-3mb-1p">Graduated High School</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!--Row 2-->
-  <section id="services-1354">
-    <div class="cs-container">
-      <h2 class="cs-title2">Research</h2>
-    </div>
-    <div class="container">
-
-      <div class="row">
-        <div class="col">
-          <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-            <div class="timeline-step mb-0">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">December 2022</p>
-                <p class="h6mt-3mb-1p">Research on Fractran Started</p>
-              </div>
-            </div>
-
-
-
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2010">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">June 2023</p>
-                <p class="h6mt-3mb-1p">Dept. of Math Grant- Fractran (NSF), Pairs Trading
-                  Research by ASSURE-US (NSF-funded)</p>
-              </div>
-            </div>
-
-            <div class="timeline-step mb-0">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">November 2023</p>
-                <p class="h6mt-3mb-1p">Presented & Volunteered at SCCUR</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">April 2024</p>
-                <p class="h6mt-3mb-1p">Presented at NCUR</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">January 2025</p>
-                <p class="h6mt-3mb-1p">Present at Joint Mathematics Convention
+        <div class="section" id="section6">
+            <div class="glass">
+                <h2>Contact</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    I'm always open to exciting opportunities or a friendly chat — feel free to reach out!
                 </p>
-              </div>
+                <ul class="contact-links" style="list-style: none; padding: 0;">
+                    <li><a href="mailto:kkaushik@ucsd.edu">kkaushik@ucsd.edu</a></li>
+                    <li><a href="https://linkedin.com/in/khushikaushik2506" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://khushikaushik.com" target="_blank">Portfolio</a></li>
+                </ul>
+                <a href="mailto:kkaushik@ucsd.edu" class="cta-button" style="margin-top: 20px; display: inline-block;">Let's Connect</a>
             </div>
-
-          </div>
         </div>
-      </div>
     </div>
-  </section>
 
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
-  <!--Row3-->
-  <section id="services-1354">
-    <div class="cs-container">
-      <h2 class="cs-title2">Work and Extracurriculars</h2>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">Feburary 2023</p>
-                <p class="h6mt-3mb-1p">Treehacks @ Stanford</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">August 2023</p>
-                <p class="h6mt-3mb-1p">Tutor for Linear Algebra, Data Structures</p>
-              </div>
-            </div>
-            <div class="timeline-step mb-0">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">August 2023</p>
-                <p class="h6mt-3mb-1p">Association for Computing Machinery-Women
-                  President</p>
-              </div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">May 2023</p>
-                <p class="h6mt-3mb-1p">SRE CIC|PICUBED (NSF-funded) - Data Science</p>
-              </div>
-            </div>
-            <div class="timeline-step mb-0">
-              <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title=""
-                data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
-                <div class="inner-circle"></div>
-                <p class="h6mt-3mb-1">April 2023</p>
-                <p class="h6mt-3mb-1p">ECS Diversity Summit Student Outreach Lead</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- particles.js config -->
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: ["#00bfff", "#ff3c38"] }, // blue + red
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 1, random: true }, // smaller dots
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00bfff", // blue lines
+                    opacity: 0.3,
+                    width: 2
+                },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "window",
+                events: {
+                    onhover: { enable: true, mode: "bubble" },
+                    onclick: { enable: true, mode: "repulse" }, // default mode
+                    resize: true
+                },
+                modes: {
+                    bubble: {
+                        distance: 200,
+                        size: 8,
+                        duration: 2,
+                        opacity: 0.8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 150,
+                        duration: 0.4
+                    },
+                    grab: {
+                        distance: 300,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
 
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('#navbar a');
 
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const link = document.querySelector(`#navbar a[href="#${section.id}"]`);
+                if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    if (link) link.classList.add('active');
+                }
+            });
+        }
 
-  <div class="center-wrapper">
-    <div id="skills-section" class="skills-section">
-      <h2 class="cs-title">Skills and Tools</h2>
-      <div class="skills-container">
+        document.querySelector('.snap-container').addEventListener('scroll', updateActiveNav);
+        window.addEventListener('load', updateActiveNav);
+        window.addEventListener('resize', updateActiveNav);
 
-        <!-- Languages -->
-        <div class="skill-item">
-          <p>Languages</p>
-          <div class="icons">
-            <img src="images/java.png" alt="Java Icon" class="icon">
-            <img src="images/python.png" alt="Python Icon" class="icon">
-            <img src="images/R.png" alt="R Icon" class="icon">
-            <img src="images/cplusplus.png" alt="C++ Icon" class="icon">
-          </div>
-          <div class="skill-bar"></div>
-        </div>
+        function getCurrentSection() {
+            const sections = document.querySelectorAll('.section');
+            for (let section of sections) {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                    return section.id;
+                }
+            }
+            return null;
+        }
 
-        <!-- Specialties -->
-        <div class="skill-item">
-          <p>Specialties</p>
-          <div class="icons">
-            <img src="images/numpy.png" alt="NumPy Icon" class="icon">
-            <img src="images/pandas.png" alt="Pandas Icon" class="icon">
-            <img src="images/matplotlib.png" alt="Matplotlib Icon" class="icon">
-            <img src="images/seaborn.jpeg" alt="Seaborn Icon" class="icon">
-            <img src="images/keras.png" alt="Keras Icon" class="icon">
-            <img src="images/pytorch.png" alt="PyTorch Icon" class="icon">
-            <img src="images/tensorflow.png" alt="TensorFlow Icon" class="icon">
-          </div>
-          <div class="skill-bar"></div>
-        </div>
+        function setInteractionModes(sectionId) {
+            const pJS = window.pJSDom[0].pJS;
+            if (sectionId === "section1") {
+                pJS.interactivity.events.onhover.mode = 'repulse';
+                pJS.interactivity.events.onclick.mode = 'grab';
+            } else {
+                pJS.interactivity.events.onhover.mode = 'bubble';
+                pJS.interactivity.events.onclick.mode = 'repulse';
+            }
+        }
 
-        <!-- Technologies -->
-        <div class="skill-item">
-          <p>Technologies</p>
-          <div class="icons">
-            <img src="images/git.png" alt="Git Icon" class="icon">
-            <img src="images/github.png" alt="GitHub Icon" class="icon">
-            <img src="images/microsoft office .jpeg" alt="Microsoft Office Icon" class="icon">
-            <img src="images/react.png" alt="ReactJS Icon" class="icon">
-            <img src="images/latex.png" alt="LaTeX Icon" class="icon">
-          </div>
-          <div class="skill-bar"></div>
-        </div>
+        document.getElementById('particles-js').addEventListener('mousemove', function () {
+            const current = getCurrentSection();
+            setInteractionModes(current);
+        });
 
-        <!-- Database -->
-        <div class="skill-item">
-          <p>Database</p>
-          <div class="icons">
-            <img src="images/mysql.png" alt="MySQL Icon" class="icon">
-            <img src="images/mysqlplus.png" alt="SQLPlus Icon" class="icon">
-          </div>
-          <div class="skill-bar"></div>
-        </div>
+        document.getElementById('particles-js').addEventListener('click', function (e) {
+            const current = getCurrentSection();
+            setInteractionModes(current);
 
-      </div>
-    </div>
-  </div>
+            const pJS = window.pJSDom[0].pJS;
 
+            if (current === "section1") {
+                // Set the mouse position and trigger the grab connection manually
+                pJS.interactivity.mouse.pos_x = e.clientX;
+                pJS.interactivity.mouse.pos_y = e.clientY;
+                pJS.interactivity.status = "mousemove";
 
-  <div class="projects-gallery" id="projects-section">
-    <div class="cs-content">
-      <div class="cs-container">
-        <h2 class="cs-title2">Projects</h2>
-      </div>
+                // Allow a short duration for the grab effect before resetting
+                setTimeout(() => {
+                    pJS.interactivity.mouse.pos_x = null;
+                    pJS.interactivity.mouse.pos_y = null;
+                    pJS.interactivity.status = "mouseleave";
+                }, 1500);
+            } else {
+                // Repulse for other sections
+                pJS.fn.vendors.interactivity.mouse.click_pos_x = e.clientX;
+                pJS.fn.vendors.interactivity.mouse.click_pos_y = e.clientY;
+                pJS.fn.vendors.interactivity.el_click(e);
+            }
+        });
 
-    </div>
-    <div class="card-container">
-      <!-- Project Card 1 -->
-      <div class="project-card">
-        <img src="images/Wordle.png" alt="Software Engineering" class="project-image">
-        <h3 class="project-title"> Wordle Replica</h3>
-        <p class="project-description"> Created a Wordle clone with a 10,000-word library, scoring system, and
-          real-time feedback, using HTML, CSS, and JavaScript.</p>
-      </div>
-      <!-- Project Card 2 -->
-      <div class="project-card">
-        <img src="images/longcovid.jpeg" alt="Data Science Project" class="project-image">
-        <h3 class="project-title">Long COVID-19 Prediction Model</h3>
-        <p class="project-description"> Built a logistic regression model with CDC survey data, achieving 79%
-          accuracy in predicting Long COVID risk based on demographics and symptoms..</p>
-      </div>
-      <!-- Project Card 3 -->
-      <div class="project-card">
-        <img src="images/CDR.jpeg" alt="Machine Learning" class="project-image">
-        <h3 class="project-title">Predicting Column Drift Ratio for Bridges</h3>
-        <p class="project-description">Developed machine learning models using earthquake data to predict bridge
-          column drift with 0.90 adjusted R² accuracy.
-        </p>
-      </div>
-      <!-- Project Card 4 -->
-      <div class="project-card">
-        <img src="images/fract.png" alt="Research" class="project-image">
-        <h3 class="project-title">Fractran</h3>
-        <p class="project-description"> Designed FRACTRAN programs to compute √2 using Catalan’s product and
-          Newton-Raphson method, extending Conway’s esoteric programming language work.</p>
-      </div>
-    </div>
-  </div>
+        // stats.js + particle count
+        var stats, update;
+        stats = new Stats();
+        stats.setMode(0); // 0: fps, 1: ms
+        stats.domElement.id = "stats";
+        document.body.appendChild(stats.domElement);
 
-  <div class="projects-gallery" >
-    <div class="cs-content">
-      <div class="cs-container">
-        <h2 class="cs-title2"style="padding-top:100px;">Contact Me!</h2>
-      </div>
-
-  </div>
-  <section id="contact-me">
-    <div class="contact-container">
-
-      <ul class="contact-list">
-        <li>
-          <a href="mailto:khushi.kaushik.2506@gmail.com" target="_blank">
-            <i class="fas fa-envelope"></i> Gmail
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/khushi-kaushik-39330418a/" target="_blank">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-        </li>
-        <li>
-          <a href="#" onclick="navigator.clipboard.writeText('chocokookie')">
-            <i class="fab fa-discord"></i> Discord
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
+        update = function () {
+            stats.begin();
+            stats.end();
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
 </body>
 
 </html>
