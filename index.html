@@ -48,7 +48,7 @@
             font-style: normal;
             font-weight: 400;
             background: #000;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         canvas {
@@ -143,6 +143,7 @@
         .snap-container {
             height: 100vh;
             overflow-y: scroll;
+            overflow-x: hidden;
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
             position: relative;
@@ -323,6 +324,74 @@
             box-shadow: 0 0 30px 6px rgba(230, 184, 0, 0.4);
             transform: scale(1.01);
         }
+
+        .experience-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: stretch;
+          gap: 20px;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          flex-flow: row wrap;
+        }
+
+        @media (max-width: 768px) {
+          .experience-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+          }
+
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .experience-card {
+            height: auto;
+            max-height: 340px;
+            overflow-y: auto;
+          }
+
+          .experience-card ul li:nth-child(n+3) {
+            display: none;
+          }
+
+          .project-card h3 {
+            font-size: 1.1rem;
+          }
+
+          .project-card p {
+            font-size: 0.9rem;
+          }
+        }
+
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+          max-width: 1100px;
+          width: 100%;
+          justify-items: center;
+        }
+
+        @media (max-width: 768px) {
+          .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+          }
+
+          .projects-grid .project-card {
+            min-height: auto;
+            height: auto;
+          }
+
+          .projects-grid .project-card:nth-child(5) {
+            grid-column: span 1;
+          }
+        }
     </style>
 </head>
 
@@ -349,7 +418,8 @@
             <h2 class="outfit">I'm a full stack developer & AI engineer.</h2>
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
               <a href="#section3" class="cta-button">View my work ↓</a>
-            <a href="Khushi_Kaushik 07_21_2025.pdf" class="cta-button" download>Download Résumé ↓</a>            </div>
+              <a href="Khushi_Kaushik 07:21:2025.pdf" class="cta-button" download>Download Résumé ↓</a>
+            </div>
         </div>
         <div class="section" id="section2">
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
@@ -365,9 +435,9 @@
 </div>
         </div>
         <div class="section" id="section3" style="padding-bottom: 20px;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1100px;">
+          <div class="projects-grid">
             <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('drone.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
                 <h3 style="margin: 0; color: #e6b800;">Altivue</h3>
                 <p style="margin: 5px 0 10px; color: #ffffff;">AI-powered drone with YOLOv5 & RAG for safer pathing.</p>
                 <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A smart drone that can "see" and avoid obstacles using AI.</p>
@@ -376,7 +446,7 @@
               </div>
             </div>
             <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('biomarker.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
                 <h3 style="margin: 0; color: #e6b800;">Biomarker Predictor</h3>
                 <p style="margin: 5px 0 10px; color: #ffffff;">AI for neuro-cognitive decline post cardiac surgery (AUROC 0.86).</p>
                 <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> Predicts if a patient might develop brain issues after heart surgery.</p>
@@ -385,7 +455,7 @@
               </div>
             </div>
             <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('stocks.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
                 <h3 style="margin: 0; color: #e6b800;">Stock Forecaster</h3>
                 <p style="margin: 5px 0 10px; color: #ffffff;">LSTM + XGBoost ensemble for S&amp;P 500 trends (70% accuracy).</p>
                 <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A model that guesses stock market trends using AI.</p>
@@ -394,7 +464,7 @@
               </div>
             </div>
             <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('fractran.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
                 <h3 style="margin: 0; color: #e6b800;">FRACTRAN Research</h3>
                 <p style="margin: 5px 0 10px; color: #ffffff;">Computed √2 with prime-state FRACTRAN; published on arXiv.</p>
                 <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A math project proving irrational numbers using prime sequences.</p>
@@ -403,7 +473,7 @@
               </div>
             </div>
             <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('llm.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; bottom: 0; background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
                 <h3 style="margin: 0; color: #e6b800;">LLM Tooling (In Progress)</h3>
                 <p style="margin: 5px 0 10px; color: #ffffff;">Building interfaces and pipelines for interacting with large language models.</p>
                 <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A toolkit to integrate and experiment with LLMs efficiently.</p>
@@ -427,7 +497,7 @@
         </div>
         <div class="section" id="section5">
         
-            <div style="display: flex; justify-content: center; align-items: stretch; gap: 20px; flex-wrap: nowrap;">
+            <div class="experience-wrapper">
               <div class="experience-card">
                 <h3 style="color: #e6b800;">LLM Prompt Optimization</h3>
                 <ul>
