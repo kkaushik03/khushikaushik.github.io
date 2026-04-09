@@ -1,714 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Khushi Kaushik Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <style>
-        .project-card {
-            transition: box-shadow 0.4s ease;
-            will-change: box-shadow;
-        }
+<meta charset="UTF-8">
+<title>Khushi Kaushik Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
 
-        .project-card:hover {
-            box-shadow: 0 0 35px 6px rgba(230, 184, 0, 0.8) !important;
-            transform: scale(1.02);
-        }
+/* ── CURSOR GLOW ── */
+#cursor-glow {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230,184,0,0.07) 0%, transparent 70%);
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+}
 
-        .experience-card {
-            background: rgba(10, 10, 10, 0.12);
-            -webkit-backdrop-filter: blur(40px);
-            backdrop-filter: blur(40px);
-            border-radius: 12px;
-            padding: 16px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); 
-            color: white;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 260px;
-            height: 580px;
-            overflow-y: auto;
-        }
+/* ── TYPING CURSOR ── */
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+  color: #e6b800;
+  font-weight: 300;
+}
+@keyframes blink { 50% { opacity: 0; } }
 
-        .experience-card:hover {
-            box-shadow: 0 0 30px 8px rgba(230, 184, 0, 0.6);
-            transform: scale(1.05);
-        }
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: "Outfit", sans-serif;
-            font-optical-sizing: auto;
-            font-style: normal;
-            font-weight: 400;
-            background: #000;
-            overflow-x: hidden;
-        }
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
 
-        canvas {
-            display: block;
-            vertical-align: bottom;
-        }
+/* ── PROJECT CARDS ── */
+.project-card {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  will-change: box-shadow;
+}
+.project-card:hover {
+  box-shadow: 0 0 35px 6px rgba(230, 184, 0, 0.8) !important;
+  transform: scale(1.02);
+}
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 50% 50%;
-            z-index: 0;
-        }
+/* ── EXPERIENCE CARDS ── */
+.experience-card {
+  background: rgba(10, 10, 10, 0.12);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 260px;
+  height: 580px;
+  overflow-y: auto;
+}
+.experience-card:hover {
+  box-shadow: 0 0 30px 8px rgba(230, 184, 0, 0.6);
+  transform: scale(1.05);
+}
 
-        #stats {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            border-radius: 3px 3px 0 0;
-            overflow: hidden;
-        }
+/* ── BASE ── */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400;
+  background: #000;
+  overflow-x: hidden;
+}
 
-        #navbar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            display: flex;
-            flex-direction: row;
-            gap: 18px;
-            align-items: center;
-            padding: 12px;
-            background: transparent;
-        }
+canvas { display: block; vertical-align: bottom; }
 
-        #navbar a {
-            width: 16px;
-            height: 16px;
-            background-color: #aaa;
-            border-radius: 50%;
-            display: block;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-        }
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: 0;
+}
 
-        #navbar a.active {
-            background-color: red;
-            transform: scale(2.5);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
+/* ── NAVBAR — pill style ── */
+#navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  align-items: center;
+  padding: 12px;
+  background: transparent;
+}
 
-        #navbar a::after {
-            content: attr(data-label);
-            position: absolute;
-            color: white;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            white-space: nowrap;
-            pointer-events: none;
-            top: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+#navbar a {
+  width: 8px;
+  height: 8px;
+  background-color: #555;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
 
-        #navbar a.active::after {
-            opacity: 1;
-        }
+#navbar a.active {
+  width: 32px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #e6b800;
+  transform: none;
+}
 
-        #navbar a:hover {
-            background-color: #e6b800;
-            transform: scale(2);
-        }
+#navbar a::after {
+  content: attr(data-label);
+  position: absolute;
+  color: white;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-        #navbar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 32px;
-        }
+#navbar a.active::after { opacity: 1; }
 
-        .snap-container {
-            height: 100vh;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-            position: relative;
-            z-index: 1;
-        }
+#navbar a:hover:not(.active) {
+  background-color: #888;
+  transform: scale(1.3);
+}
 
-        .section {
-            height: 100vh;
-            scroll-snap-align: start;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            padding: 0 20px;
-            color: white;
-            position: relative;
-            box-shadow: none;
-        }
+#navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
 
-        #section1::before,
-        #section2::before,
-        #section3::before,
-        #section4::before,
-        #section5::before,
-        #section6::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 100%;
-            background: linear-gradient(to right, #e6b800 0%, transparent 100%);
-            opacity: 0.25;
-            z-index: 1;
-        }
+/* ── SNAP CONTAINER ── */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+}
 
-        #section1::after,
-        #section2::after,
-        #section3::after,
-        #section4::after,
-        #section5::after,
-        #section6::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 10px;
-            height: 100%;
-            background: linear-gradient(to left, #e6b800 0%, transparent 100%);
-            opacity: 0.25;
-            z-index: 1;
-        }
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 20px;
+  color: white;
+  position: relative;
+  box-shadow: none;
+}
 
-        .glass {
-            background: rgba(10, 10, 10, 0.12);
-            -webkit-backdrop-filter: blur(40px);
-            backdrop-filter: blur(40px);
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 700px;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
-            z-index: 2;
-        }
+#section1::before, #section2::before, #section3::before,
+#section4::before, #section5::before, #section6::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px; height: 100%;
+  background: linear-gradient(to right, #e6b800 0%, transparent 100%);
+  opacity: 0.25;
+  z-index: 1;
+}
 
-        .glass p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
+#section1::after, #section2::after, #section3::after,
+#section4::after, #section5::after, #section6::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 10px; height: 100%;
+  background: linear-gradient(to left, #e6b800 0%, transparent 100%);
+  opacity: 0.25;
+  z-index: 1;
+}
 
+/* ── GLASS CARD ── */
+.glass {
+  background: rgba(10, 10, 10, 0.12);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 700px;
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  z-index: 2;
+}
+.glass p { font-size: 1rem; line-height: 1.6; }
+.glass:hover {
+  box-shadow: 0 0 30px 6px rgba(230, 184, 0, 0.4);
+  transform: scale(1.01);
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-            font-size: 1.2rem;
-        }
+/* ── HERO ── */
+#section1 h1 {
+  font-size: 5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+#section1 h2 {
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  color: white;
+  min-height: 4rem;
+}
 
-        ul li {
-            margin: 0.5rem 0;
-        }
+/* ── ACCENT / FONTS ── */
+.accent { color: #e6b800; }
 
-        .intro-glass {
-            background: none;
-            box-shadow: none;
-            text-align: center;
-        }
+.stalinist-one-regular {
+  font-family: "Stalinist One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-        #section1 h1 {
-            font-size: 5rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
+.outfit {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
-        #section1 h2 {
-            font-size: 3.2rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            color: white;
-        }
+/* ── CTA BUTTON ── */
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #e6b800;
+  border: 2px solid #e6b800;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.cta-button:hover { background: #e6b800; color: black; }
 
-        .accent {
-            color: #e6b800;
-        }
+/* ── SKILLS — chip style ── */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  max-width: 900px;
+}
 
-        .stalinist-one-regular {
-          font-family: "Stalinist One", sans-serif;
-          font-weight: 400;
-          font-style: normal;
-        }
+.skill-chip {
+  border: 1px solid rgba(230, 184, 0, 0.5);
+  border-radius: 4px;
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  color: #e6b800;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: default;
+}
+.skill-chip:hover {
+  background: rgba(230, 184, 0, 0.1);
+  border-color: #e6b800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 184, 0, 0.2);
+}
 
-        .outfit {
-          font-family: "Outfit", sans-serif;
-          font-optical-sizing: auto;
-          font-style: normal;
-        }
+/* ── CONTACT ── */
+.contact-links a {
+  color: white;
+  text-decoration: underline;
+  font-size: 1.2rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.contact-links a:hover {
+  color: #e6b800;
+  text-shadow: 0 0 10px #e6b800;
+}
 
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #e6b800;
-            border: 2px solid #e6b800;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: background 0.3s, color 0.3s;
-        }
+/* ── EXPERIENCE WRAPPER ── */
+.experience-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 
-        .cta-button:hover {
-            background: #e6b800;
-            color: black;
-        }
+/* ── PROJECTS GRID ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  width: 100%;
+  justify-items: center;
+}
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            text-align: left;
-            color: white;
-            font-size: 1.1rem;
-            padding: 20px;
-        }
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .experience-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+  .experience-card {
+    height: auto;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .experience-card ul li:nth-child(n+3) { display: none; }
+  .project-card h3 { font-size: 1.1rem; }
+  .project-card p { font-size: 0.9rem; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+  .projects-grid .project-card { min-height: auto; height: auto; }
+  .projects-grid .project-card:nth-child(5) { grid-column: span 1; }
+  #section1 h1 { font-size: 3rem; }
+  #section1 h2 { font-size: 2rem; }
+}
 
-        .skills-grid div {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(230, 184, 0, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .skills-grid div:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px 6px rgba(230, 184, 0, 0.5);
-        }
-
-        .skills-grid strong {
-            color: #e6b800;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-
-        .contact-links a {
-            color: white;
-            text-decoration: underline;
-            font-size: 1.2rem;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        .contact-links a:hover {
-            color: #e6b800;
-            text-shadow: 0 0 10px #e6b800;
-        }
-
-        .glass:hover {
-            box-shadow: 0 0 30px 6px rgba(230, 184, 0, 0.4);
-            transform: scale(1.01);
-        }
-
-        .experience-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: stretch;
-          gap: 20px;
-          flex-wrap: nowrap;
-          flex-direction: row;
-          flex-flow: row wrap;
-        }
-
-        @media (max-width: 768px) {
-          .experience-wrapper {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            justify-items: center;
-          }
-
-          .skills-grid {
-            grid-template-columns: 1fr !important;
-          }
-
-          .experience-card {
-            height: auto;
-            max-height: 340px;
-            overflow-y: auto;
-          }
-
-          .experience-card ul li:nth-child(n+3) {
-            display: none;
-          }
-
-          .project-card h3 {
-            font-size: 1.1rem;
-          }
-
-          .project-card p {
-            font-size: 0.9rem;
-          }
-        }
-
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 20px;
-          max-width: 1100px;
-          width: 100%;
-          justify-items: center;
-        }
-
-        @media (max-width: 768px) {
-          .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            justify-items: center;
-          }
-
-          .projects-grid .project-card {
-            min-height: auto;
-            height: auto;
-          }
-
-          .projects-grid .project-card:nth-child(5) {
-            grid-column: span 1;
-          }
-        }
-    </style>
+</style>
 </head>
-
 <body>
-    <!-- particles.js container -->
-    <div id="particles-js"></div>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <ul>
-            <li><a href="#section1" class="active" data-label="Introduction"></a></li>
-            <li><a href="#section2" data-label="About Me"></a></li>
-            <li><a href="#section3" data-label="Projects"></a></li>
-            <li><a href="#section4" data-label="Skills"></a></li>
-            <li><a href="#section5" data-label="Experience"></a></li>
-            <li><a href="#section6" data-label="Contact"></a></li>
-        </ul>
-    </nav>
+<!-- Cursor glow -->
+<div id="cursor-glow"></div>
 
-    <!-- Page Content -->
-    <div class="snap-container">
-        <div class="section" id="section1">
-            <h1 class="stalinist-one-regular">Hello, I'm <span class="accent">Khushi</span>.</h1>
-            <h2 class="outfit">I'm a full stack developer & AI engineer.</h2>
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-              <a href="#section3" class="cta-button">View my work ↓</a>
-              <a href="Khushi_Kaushik_Resume.pdf" class="cta-button" download>Download Résumé ↓</a>
-            </div>
-        </div>
-        <div class="section" id="section2">
-            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
-  <div style="flex: 1; min-width: 200px; max-width: 280px;">
-    <img src="updated portfolio.jpg" alt="Khushi" style="width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(230, 184, 0, 0.6);" />
-  </div>
-  <div class="glass" style="flex: 2; min-width: 300px; height: 300px; padding: 80px 60px;">
-    <p style="font-size: 1.2rem;">
-      <span style="font-size: 1.2rem; font-weight: 600;">I'm a Computer Science grad student at UCSD (MS CS + MicroMBA), and I graduated Magna Cum Laude from CSUF with a BS in CS.</span><br><br>
-      <span style="font-size: 1.2rem;">I’m deeply passionate about data engineering, machine learning, and full-stack development. I love building intelligent, scalable systems that solve real-world problems—from deploying ML pipelines to crafting intuitive user interfaces. My mission is to merge data-driven insights with software craftsmanship to create technology that works smart and feels seamless.</span>
-    </p>
-  </div>
-</div>
-        </div>
-        <div class="section" id="section3" style="padding-bottom: 20px;">
-          <div class="projects-grid">
-            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('drone.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-                <h3 style="margin: 0; color: #e6b800;">Altivue</h3>
-                <p style="margin: 5px 0 10px; color: #ffffff;">AI-powered drone with YOLOv5 & RAG for safer pathing.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A smart drone that can "see" and avoid obstacles using AI.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Useful in search & rescue, agriculture, and surveillance.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> YOLOv5, Python, Computer Vision, RAG.</p>
-              </div>
-            </div>
-            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('biomarker.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-                <h3 style="margin: 0; color: #e6b800;">Biomarker Predictor</h3>
-                <p style="margin: 5px 0 10px; color: #ffffff;">AI for neuro-cognitive decline post cardiac surgery (AUROC 0.86).</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> Predicts if a patient might develop brain issues after heart surgery.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Hospitals for post-op patient care planning.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> AUROC, Scikit-learn, Python, SHAP.</p>
-              </div>
-            </div>
-            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('stocks.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-                <h3 style="margin: 0; color: #e6b800;">Stock Forecaster</h3>
-                <p style="margin: 5px 0 10px; color: #ffffff;">LSTM + XGBoost ensemble for S&amp;P 500 trends (70% accuracy).</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A model that guesses stock market trends using AI.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Finance tools, investor dashboards.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LSTM, XGBoost, Python, Time Series.</p>
-              </div>
-            </div>
-            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('fractran.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-                <h3 style="margin: 0; color: #e6b800;">FRACTRAN Research</h3>
-                <p style="margin: 5px 0 10px; color: #ffffff;">Computed √2 with prime-state FRACTRAN; published on arXiv.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A math project proving irrational numbers using prime sequences.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Research labs, theoretical computing studies.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> Number theory, Math modeling, Python.</p>
-              </div>
-            </div>
-            <div class="project-card" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('llm.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-                <h3 style="margin: 0; color: #e6b800;">LLM Tooling (In Progress)</h3>
-                <p style="margin: 5px 0 10px; color: #ffffff;">Building interfaces and pipelines for interacting with large language models.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A toolkit to integrate and experiment with LLMs efficiently.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Dev platforms, AI product prototyping, GenAI experimentation.</p>
-                <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LLMs, Python, Prompt Engineering, RAG, LangChain.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section" id="section4">
-            <div class="skills-grid">
-              <div><strong>Programming Languages</strong><br>JavaScript, TypeScript, Python, SQL, C++, C#, R, Java, HTML, CSS</div>
-              <div><strong>AI Tools & Frameworks</strong><br>TensorFlow, PyTorch, Scikit-learn, Keras, SHAP, YOLOv5, RAG, GPT-J, LLaMA, Mistral</div>
-              <div><strong>Developer Tools</strong><br>Git, GitHub, VS Code, AWS, Jupyter, Flask, FastAPI, SQLite, MySQL, Databricks, Linux</div>
-              <div><strong>Front-End</strong><br>React, Next.js, Bootstrap, Responsive Design, UI/UX Principles</div>
-              <div><strong>Back-End</strong><br>.NET, Flask, Node.js, MongoDB, RESTful APIs</div>
-              <div><strong>Concepts</strong><br>Object-Oriented Programming, Full-Stack Development, Cross-browser Compatibility, Version Control, Relational Databases</div>
-              <div><strong>Focus Areas</strong><br>User-Focused Design, AI Agent Workflows, LLM Integration</div>
-              <div><strong>Cloud & DevOps</strong><br>Docker, Kubernetes, GitHub Actions, GitLab CI, REST APIs, gRPC, Postman, Terraform</div>
-            </div>
-        </div>
-        <div class="section" id="section5">
-        
-            <div class="experience-wrapper">
-              <div class="experience-card">
-                <h3 style="color: #e6b800;">LLM Prompt Optimization</h3>
-                <ul>
-                  <li style="color: #ffffff;"><strong>What I did:</strong> Reduced latency 15%+ across GPT-J, LLaMA using prompt compression & token efficiency strategies.</li>
-                  <li style="color: #ffffff;"><strong>Skills used:</strong> Prompt Engineering, LLMs, Tokenization</li>
-                  <li style="color: #ffffff;"><strong>Impact:</strong> Enabled faster GenAI response in RAG-based apps.</li>
-                  <li style="color: #ffffff;"><strong>Tools:</strong> Python, GPT-J, LLaMA</li>
-                  <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
-                  <li style="color: #ffffff;"><strong>Timeline:</strong> Jan 2024 – Mar 2024</li>
-                </ul>
-              </div>
-              <div class="experience-card">
-                <h3 style="color: #e6b800;">CSUF Teaching Assistant</h3>
-                <ul>
-                  <li style="color: #ffffff;"><strong>What I did:</strong> Tutored 1,500+ students in Python & SQL. Led labs, created exam prep, and mentored capstones.</li>
-                  <li style="color: #ffffff;"><strong>Skills used:</strong> Python, SQL, Teaching, Curriculum Design</li>
-                  <li style="color: #ffffff;"><strong>Impact:</strong> Improved average lab scores by 12%</li>
-                  <li style="color: #ffffff;"><strong>Tools:</strong> Zoom, Python, SQL IDEs</li>
-                  <li style="color: #ffffff;"><strong>Environment:</strong> Academic, undergrad labs</li>
-                  <li style="color: #ffffff;"><strong>Timeline:</strong> Aug 2021 – May 2023</li>
-                </ul>
-              </div>
-              <div class="experience-card">
-                <h3 style="color: #e6b800;">SoCal Research</h3>
-                <ul>
-                  <li style="color: #ffffff;"><strong>What I did:</strong> Predicted earthquake column drift with R² = 0.94 using ML models and regression.</li>
-                  <li style="color: #ffffff;"><strong>Skills used:</strong> Python, Scikit-learn, Regression, Sensor Data</li>
-                  <li style="color: #ffffff;"><strong>Impact:</strong> Boosted accuracy of seismic drift predictions by 18%</li>
-                  <li style="color: #ffffff;"><strong>Tools:</strong> Jupyter, Scikit-learn, Pandas</li>
-                  <li style="color: #ffffff;"><strong>Environment:</strong> Collaborative lab (6-person team)</li>
-                  <li style="color: #ffffff;"><strong>Timeline:</strong> Jun 2023 – Sep 2023</li>
-                </ul>
-              </div>
-              <div class="experience-card">
-                <h3 style="color: #e6b800;">FRACTRAN Math Research</h3>
-                <ul>
-                  <li style="color: #ffffff;"><strong>What I did:</strong> Proved √2 using a prime-state FRACTRAN machine. Published findings on arXiv.</li>
-                  <li style="color: #ffffff;"><strong>Skills used:</strong> Number Theory, Math Modeling, Python</li>
-                  <li style="color: #ffffff;"><strong>Impact:</strong> Presented findings at World's Largest Math Conference (JMM)</li>
-                  <li style="color: #ffffff;"><strong>Tools:</strong> Python, LaTeX, arXiv</li>
-                  <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
-                  <li style="color: #ffffff;"><strong>Timeline:</strong> Dec 2023 – Feb 2024</li>
-                </ul>
-              </div>
-            </div>
-        </div>
-        <div class="section" id="section6">
-            <div class="glass">
-                <h2>Contact</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                    I'm always open to exciting opportunities or a friendly chat — feel free to reach out!
-                </p>
-                <ul class="contact-links" style="list-style: none; padding: 0;">
-                    <li><a href="mailto:kkaushik@ucsd.edu">kkaushik@ucsd.edu</a></li>
-                    <li><a href="https://linkedin.com/in/khushikaushik2506" target="_blank">LinkedIn</a></li>
-                    <li><a href="https://khushikaushik.com" target="_blank">Portfolio</a></li>
-                </ul>
-                <a href="mailto:kkaushik@ucsd.edu" class="cta-button" style="margin-top: 20px; display: inline-block;">Let's Connect</a>
-            </div>
-        </div>
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <ul>
+    <li><a href="#section1" class="active" data-label="Introduction"></a></li>
+    <li><a href="#section2" data-label="About Me"></a></li>
+    <li><a href="#section3" data-label="Projects"></a></li>
+    <li><a href="#section4" data-label="Skills"></a></li>
+    <li><a href="#section5" data-label="Experience"></a></li>
+    <li><a href="#section6" data-label="Contact"></a></li>
+  </ul>
+</nav>
+
+<!-- Page Content -->
+<div class="snap-container">
+
+  <!-- SECTION 1: HERO -->
+  <div class="section" id="section1">
+    <h1 class="stalinist-one-regular">Hello, I'm <span class="accent">Khushi</span>.</h1>
+    <h2 class="outfit">I'm a <span id="typed-role"></span><span class="cursor-blink">|</span></h2>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+      <a href="#section3" class="cta-button reveal reveal-delay-1">View my work ↓</a>
+      <a href="Khushi_Kaushik_Resume.pdf" class="cta-button reveal reveal-delay-2" download>Download Résumé ↓</a>
     </div>
+  </div>
 
-    <!-- Libraries -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+  <!-- SECTION 2: ABOUT -->
+  <div class="section" id="section2">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
+      <div style="flex: 1; min-width: 200px; max-width: 280px;" class="reveal">
+        <img src="updated portfolio.jpg" alt="Khushi" style="width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(230, 184, 0, 0.6);" />
+      </div>
+      <div class="glass reveal reveal-delay-2" style="flex: 2; min-width: 300px; height: 300px; padding: 80px 60px;">
+        <p style="font-size: 1.2rem;">
+          <span style="font-size: 1.2rem; font-weight: 600;">I'm a Computer Science grad student at UCSD (MS CS + MicroMBA), and I graduated Magna Cum Laude from CSUF with a BS in CS.</span><br><br>
+          <span style="font-size: 1.2rem;">I'm deeply passionate about data engineering, machine learning, and full-stack development. I love building intelligent, scalable systems that solve real-world problems—from deploying ML pipelines to crafting intuitive user interfaces. My mission is to merge data-driven insights with software craftsmanship to create technology that works smart and feels seamless.</span>
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <!-- particles.js config -->
-    <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: ["#00bfff", "#ff3c38"] }, // blue + red
-                shape: { type: "circle" },
-                opacity: { value: 0.5 },
-                size: { value: 1, random: true }, // smaller dots
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#00bfff", // blue lines
-                    opacity: 0.3,
-                    width: 2
-                },
-                move: {
-                    enable: true,
-                    speed: 1.5,
-                    direction: "none",
-                    random: false,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "window",
-                events: {
-                    onhover: { enable: true, mode: "bubble" },
-                    onclick: { enable: true, mode: "repulse" }, // default mode
-                    resize: true
-                },
-                modes: {
-                    bubble: {
-                        distance: 200,
-                        size: 8,
-                        duration: 2,
-                        opacity: 0.8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 150,
-                        duration: 0.4
-                    },
-                    grab: {
-                        distance: 300,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
+  <!-- SECTION 3: PROJECTS -->
+  <div class="section" id="section3" style="padding-bottom: 20px;">
+    <div class="projects-grid">
 
-        function updateActiveNav() {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('#navbar a');
+      <div class="project-card reveal reveal-delay-1" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('drone.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+          <h3 style="margin: 0; color: #e6b800;">Altivue</h3>
+          <p style="margin: 5px 0 10px; color: #ffffff;">AI-powered drone with YOLOv5 & RAG for safer pathing.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A smart drone that can "see" and avoid obstacles using AI.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Useful in search & rescue, agriculture, and surveillance.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> YOLOv5, Python, Computer Vision, RAG.</p>
+        </div>
+      </div>
 
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const link = document.querySelector(`#navbar a[href="#${section.id}"]`);
-                if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    if (link) link.classList.add('active');
-                }
-            });
-        }
+      <div class="project-card reveal reveal-delay-2" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('biomarker.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+          <h3 style="margin: 0; color: #e6b800;">Biomarker Predictor</h3>
+          <p style="margin: 5px 0 10px; color: #ffffff;">AI for neuro-cognitive decline post cardiac surgery (AUROC 0.86).</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> Predicts if a patient might develop brain issues after heart surgery.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Hospitals for post-op patient care planning.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> AUROC, Scikit-learn, Python, SHAP.</p>
+        </div>
+      </div>
 
-        document.querySelector('.snap-container').addEventListener('scroll', updateActiveNav);
-        window.addEventListener('load', updateActiveNav);
-        window.addEventListener('resize', updateActiveNav);
+      <div class="project-card reveal reveal-delay-3" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('stocks.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+          <h3 style="margin: 0; color: #e6b800;">Stock Forecaster</h3>
+          <p style="margin: 5px 0 10px; color: #ffffff;">LSTM + XGBoost ensemble for S&P 500 trends (70% accuracy).</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A model that guesses stock market trends using AI.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Finance tools, investor dashboards.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LSTM, XGBoost, Python, Time Series.</p>
+        </div>
+      </div>
 
-        function getCurrentSection() {
-            const sections = document.querySelectorAll('.section');
-            for (let section of sections) {
-                const rect = section.getBoundingClientRect();
-                if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-                    return section.id;
-                }
-            }
-            return null;
-        }
+      <div class="project-card reveal reveal-delay-1" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('fractran.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+          <h3 style="margin: 0; color: #e6b800;">FRACTRAN Research</h3>
+          <p style="margin: 5px 0 10px; color: #ffffff;">Computed √2 with prime-state FRACTRAN; published on arXiv.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A math project proving irrational numbers using prime sequences.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Research labs, theoretical computing studies.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> Number theory, Math modeling, Python.</p>
+        </div>
+      </div>
 
-        function setInteractionModes(sectionId) {
-            const pJS = window.pJSDom[0].pJS;
-            if (sectionId === "section1") {
-                pJS.interactivity.events.onhover.mode = 'repulse';
-                pJS.interactivity.events.onclick.mode = 'grab';
-            } else {
-                pJS.interactivity.events.onhover.mode = 'bubble';
-                pJS.interactivity.events.onclick.mode = 'repulse';
-            }
-        }
+      <div class="project-card reveal reveal-delay-2" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('llm.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
+          <h3 style="margin: 0; color: #e6b800;">LLM Tooling (In Progress)</h3>
+          <p style="margin: 5px 0 10px; color: #ffffff;">Building interfaces and pipelines for interacting with large language models.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A toolkit to integrate and experiment with LLMs efficiently.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Dev platforms, AI product prototyping, GenAI experimentation.</p>
+          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LLMs, Python, Prompt Engineering, RAG, LangChain.</p>
+        </div>
+      </div>
 
-        document.getElementById('particles-js').addEventListener('mousemove', function () {
-            const current = getCurrentSection();
-            setInteractionModes(current);
-        });
+    </div>
+  </div>
 
-        document.getElementById('particles-js').addEventListener('click', function (e) {
-            const current = getCurrentSection();
-            setInteractionModes(current);
+  <!-- SECTION 4: SKILLS -->
+  <div class="section" id="section4">
+    <div class="skills-grid">
+      <span class="skill-chip reveal reveal-delay-1">JavaScript</span>
+      <span class="skill-chip reveal reveal-delay-1">TypeScript</span>
+      <span class="skill-chip reveal reveal-delay-1">Python</span>
+      <span class="skill-chip reveal reveal-delay-1">SQL</span>
+      <span class="skill-chip reveal reveal-delay-1">C++</span>
+      <span class="skill-chip reveal reveal-delay-1">C#</span>
+      <span class="skill-chip reveal reveal-delay-1">R</span>
+      <span class="skill-chip reveal reveal-delay-1">Java</span>
+      <span class="skill-chip reveal reveal-delay-2">TensorFlow</span>
+      <span class="skill-chip reveal reveal-delay-2">PyTorch</span>
+      <span class="skill-chip reveal reveal-delay-2">Scikit-learn</span>
+      <span class="skill-chip reveal reveal-delay-2">Keras</span>
+      <span class="skill-chip reveal reveal-delay-2">YOLOv5</span>
+      <span class="skill-chip reveal reveal-delay-2">RAG</span>
+      <span class="skill-chip reveal reveal-delay-2">LangChain</span>
+      <span class="skill-chip reveal reveal-delay-2">GPT-J</span>
+      <span class="skill-chip reveal reveal-delay-2">LLaMA</span>
+      <span class="skill-chip reveal reveal-delay-2">Mistral</span>
+      <span class="skill-chip reveal reveal-delay-3">React</span>
+      <span class="skill-chip reveal reveal-delay-3">Next.js</span>
+      <span class="skill-chip reveal reveal-delay-3">Node.js</span>
+      <span class="skill-chip reveal reveal-delay-3">Flask</span>
+      <span class="skill-chip reveal reveal-delay-3">FastAPI</span>
+      <span class="skill-chip reveal reveal-delay-3">MongoDB</span>
+      <span class="skill-chip reveal reveal-delay-3">MySQL</span>
+      <span class="skill-chip reveal reveal-delay-3">.NET</span>
+      <span class="skill-chip reveal reveal-delay-4">AWS</span>
+      <span class="skill-chip reveal reveal-delay-4">Docker</span>
+      <span class="skill-chip reveal reveal-delay-4">Kubernetes</span>
+      <span class="skill-chip reveal reveal-delay-4">Terraform</span>
+      <span class="skill-chip reveal reveal-delay-4">GitHub Actions</span>
+      <span class="skill-chip reveal reveal-delay-4">Databricks</span>
+      <span class="skill-chip reveal reveal-delay-4">Postman</span>
+      <span class="skill-chip reveal reveal-delay-4">Linux</span>
+    </div>
+  </div>
 
-            const pJS = window.pJSDom[0].pJS;
+  <!-- SECTION 5: EXPERIENCE -->
+  <div class="section" id="section5">
+    <div class="experience-wrapper">
 
-            if (current === "section1") {
-                // Set the mouse position and trigger the grab connection manually
-                pJS.interactivity.mouse.pos_x = e.clientX;
-                pJS.interactivity.mouse.pos_y = e.clientY;
-                pJS.interactivity.status = "mousemove";
+      <div class="experience-card reveal reveal-delay-1">
+        <h3 style="color: #e6b800;">LLM Prompt Optimization</h3>
+        <ul>
+          <li style="color: #ffffff;"><strong>What I did:</strong> Reduced latency 15%+ across GPT-J, LLaMA using prompt compression & token efficiency strategies.</li>
+          <li style="color: #ffffff;"><strong>Skills used:</strong> Prompt Engineering, LLMs, Tokenization</li>
+          <li style="color: #ffffff;"><strong>Impact:</strong> Enabled faster GenAI response in RAG-based apps.</li>
+          <li style="color: #ffffff;"><strong>Tools:</strong> Python, GPT-J, LLaMA</li>
+          <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
+          <li style="color: #ffffff;"><strong>Timeline:</strong> Jan 2024 – Mar 2024</li>
+        </ul>
+      </div>
 
-                // Allow a short duration for the grab effect before resetting
-                setTimeout(() => {
-                    pJS.interactivity.mouse.pos_x = null;
-                    pJS.interactivity.mouse.pos_y = null;
-                    pJS.interactivity.status = "mouseleave";
-                }, 1500);
-            } else {
-                // Repulse for other sections
-                pJS.fn.vendors.interactivity.mouse.click_pos_x = e.clientX;
-                pJS.fn.vendors.interactivity.mouse.click_pos_y = e.clientY;
-                pJS.fn.vendors.interactivity.el_click(e);
-            }
-        });
+      <div class="experience-card reveal reveal-delay-2">
+        <h3 style="color: #e6b800;">CSUF Teaching Assistant</h3>
+        <ul>
+          <li style="color: #ffffff;"><strong>What I did:</strong> Tutored 1,500+ students in Python & SQL. Led labs, created exam prep, and mentored capstones.</li>
+          <li style="color: #ffffff;"><strong>Skills used:</strong> Python, SQL, Teaching, Curriculum Design</li>
+          <li style="color: #ffffff;"><strong>Impact:</strong> Improved average lab scores by 12%</li>
+          <li style="color: #ffffff;"><strong>Tools:</strong> Zoom, Python, SQL IDEs</li>
+          <li style="color: #ffffff;"><strong>Environment:</strong> Academic, undergrad labs</li>
+          <li style="color: #ffffff;"><strong>Timeline:</strong> Aug 2021 – May 2023</li>
+        </ul>
+      </div>
 
-        // stats.js + particle count
-        var stats, update;
-        stats = new Stats();
-        stats.setMode(0); // 0: fps, 1: ms
-        stats.domElement.id = "stats";
-        document.body.appendChild(stats.domElement);
+      <div class="experience-card reveal reveal-delay-3">
+        <h3 style="color: #e6b800;">SoCal Research</h3>
+        <ul>
+          <li style="color: #ffffff;"><strong>What I did:</strong> Predicted earthquake column drift with R² = 0.94 using ML models and regression.</li>
+          <li style="color: #ffffff;"><strong>Skills used:</strong> Python, Scikit-learn, Regression, Sensor Data</li>
+          <li style="color: #ffffff;"><strong>Impact:</strong> Boosted accuracy of seismic drift predictions by 18%</li>
+          <li style="color: #ffffff;"><strong>Tools:</strong> Jupyter, Scikit-learn, Pandas</li>
+          <li style="color: #ffffff;"><strong>Environment:</strong> Collaborative lab (6-person team)</li>
+          <li style="color: #ffffff;"><strong>Timeline:</strong> Jun 2023 – Sep 2023</li>
+        </ul>
+      </div>
 
-        update = function () {
-            stats.begin();
-            stats.end();
-            requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
-    </script>
+      <div class="experience-card reveal reveal-delay-4">
+        <h3 style="color: #e6b800;">FRACTRAN Math Research</h3>
+        <ul>
+          <li style="color: #ffffff;"><strong>What I did:</strong> Proved √2 using a prime-state FRACTRAN machine. Published findings on arXiv.</li>
+          <li style="color: #ffffff;"><strong>Skills used:</strong> Number Theory, Math Modeling, Python</li>
+          <li style="color: #ffffff;"><strong>Impact:</strong> Presented findings at World's Largest Math Conference (JMM)</li>
+          <li style="color: #ffffff;"><strong>Tools:</strong> Python, LaTeX, arXiv</li>
+          <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
+          <li style="color: #ffffff;"><strong>Timeline:</strong> Dec 2023 – Feb 2024</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: CONTACT -->
+  <div class="section" id="section6">
+    <div class="glass reveal">
+      <h2>Contact</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+        I'm always open to exciting opportunities or a friendly chat — feel free to reach out!
+      </p>
+      <ul class="contact-links" style="list-style: none; padding: 0;">
+        <li><a href="mailto:kkaushik@ucsd.edu">kkaushik@ucsd.edu</a></li>
+        <li><a href="https://linkedin.com/in/khushikaushik2506" target="_blank">LinkedIn</a></li>
+        <li><a href="https://khushikaushik.com" target="_blank">Portfolio</a></li>
+      </ul>
+      <a href="mailto:kkaushik@ucsd.edu" class="cta-button" style="margin-top: 20px; display: inline-block;">Let's Connect</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script src="script.js"></script>
 </body>
-
 </html>
