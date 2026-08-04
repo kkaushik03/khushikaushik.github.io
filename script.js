@@ -71,16 +71,16 @@ window.addEventListener('resize', updateActiveNav);
 particlesJS("particles-js", {
   particles: {
     number: { value: 100, density: { enable: true, value_area: 800 } },
-    color: { value: ["#00bfff", "#ff3c38"] },
+    color: { value: ["#D99AAB", "#855C33", "#B08D6B"] },
     shape: { type: "circle" },
-    opacity: { value: 0.5 },
-    size: { value: 1, random: true },
+    opacity: { value: 0.75 },
+    size: { value: 1.6, random: true },
     line_linked: {
       enable: true,
       distance: 150,
-      color: "#00bfff",
-      opacity: 0.3,
-      width: 2
+      color: "#B08D6B",
+      opacity: 0.45,
+      width: 1.2
     },
     move: {
       enable: true,
