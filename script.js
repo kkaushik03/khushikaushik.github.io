@@ -7,11 +7,11 @@ document.addEventListener('mousemove', e => {
 
 // ── TYPING ANIMATION ──
 const roles = [
-  "full stack developer.",
-  "AI engineer.",
-  "ML researcher.",
-  "UCSD grad student.",
-  "data engineer."
+  "an AI engineer.",
+  "a backend developer.",
+  "an ML researcher.",
+  "a UCSD grad student.",
+  "a systems programmer."
 ];
 let roleIndex = 0, charIndex = 0, deleting = false;
 

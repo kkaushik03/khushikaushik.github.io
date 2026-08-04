@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Khushi Kaushik Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Khushi Kaushik — MS Computer Science student at UC San Diego. AI engineer and backend developer working on LLM pipelines, scalable detection systems, and compiler internals.">
+<title>Khushi Kaushik — AI Engineer &amp; Backend Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -48,6 +50,14 @@
 
 /* ── PROJECT CARDS ── */
 .project-card {
+  position: relative;
+  width: 100%;
+  display: flex;
+  background: linear-gradient(150deg, rgba(230,184,0,0.07) 0%, rgba(10,10,10,0.35) 55%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
   will-change: box-shadow;
 }
@@ -55,6 +65,46 @@
   box-shadow: 0 0 35px 6px rgba(230, 184, 0, 0.8) !important;
   transform: scale(1.02);
 }
+
+.project-inner {
+  width: 100%;
+  padding: 18px 16px;
+  box-sizing: border-box;
+  text-align: left;
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  background: rgba(10, 10, 10, 0.12);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.project-inner h3 {
+  margin: 0;
+  color: #e6b800;
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+.project-inner p {
+  margin: 5px 0;
+  color: #ffffff;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.project-inner .tagline {
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+  font-size: 0.76rem;
+}
+.project-link {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: rgba(230, 184, 0, 0.75);
+  text-decoration: none;
+  margin-left: 6px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.project-link:hover { color: #e6b800; text-decoration: underline; }
 
 /* ── EXPERIENCE CARDS ── */
 .experience-card {
@@ -67,13 +117,40 @@
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 260px;
-  height: 580px;
+  width: 235px;
+  height: 560px;
   overflow-y: auto;
+  text-align: left;
 }
 .experience-card:hover {
   box-shadow: 0 0 30px 8px rgba(230, 184, 0, 0.6);
   transform: scale(1.05);
+}
+.experience-card h3 {
+  color: #e6b800;
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+.experience-card .exp-role {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+.experience-card .exp-date {
+  margin: 2px 0 10px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: rgba(230, 184, 0, 0.7);
+}
+.experience-card ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.experience-card ul li {
+  color: #ffffff;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  margin-bottom: 9px;
 }
 
 /* ── BASE ── */
@@ -327,14 +404,23 @@ canvas { display: block; vertical-align: bottom; }
 /* ── PROJECTS GRID ── */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  max-width: 1340px;
   width: 100%;
-  justify-items: center;
+  align-items: stretch;
+  justify-items: stretch;
 }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+  .projects-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
   .experience-wrapper {
     display: grid;
@@ -348,16 +434,16 @@ canvas { display: block; vertical-align: bottom; }
     overflow-y: auto;
   }
   .experience-card ul li:nth-child(n+3) { display: none; }
-  .project-card h3 { font-size: 1.1rem; }
-  .project-card p { font-size: 0.9rem; }
+  .project-inner { padding: 16px; }
+  .project-inner h3 { font-size: 1rem; }
+  .project-inner p { font-size: 0.78rem; }
+  .project-inner p:nth-of-type(n+4) { display: none; }
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     justify-items: center;
   }
-  .projects-grid .project-card { min-height: auto; height: auto; }
-  .projects-grid .project-card:nth-child(5) { grid-column: span 1; }
   #section1 h1 { font-size: 3rem; }
   #section1 h2 { font-size: 2rem; }
 }
@@ -390,7 +476,7 @@ canvas { display: block; vertical-align: bottom; }
   <!-- SECTION 1: HERO -->
   <div class="section" id="section1">
     <h1 class="stalinist-one-regular">Hello, I'm <span class="accent">Khushi</span>.</h1>
-    <h2 class="outfit">I'm a <span id="typed-role"></span><span class="cursor-blink">|</span></h2>
+    <h2 class="outfit">I'm <span id="typed-role"></span><span class="cursor-blink">|</span></h2>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
       <a href="#section3" class="cta-button reveal reveal-delay-1">View my work ↓</a>
       <a href="Khushi_Kaushik_Resume.pdf" class="cta-button reveal reveal-delay-2" download>Download Résumé ↓</a>
@@ -401,12 +487,12 @@ canvas { display: block; vertical-align: bottom; }
   <div class="section" id="section2">
     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; max-width: 1000px; padding: 80px 20px;">
       <div style="flex: 1; min-width: 200px; max-width: 280px;" class="reveal">
-        <img src="updated portfolio.jpg" alt="Khushi" style="width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(230, 184, 0, 0.6);" />
+        <img src="profile.jpg" alt="Khushi Kaushik" style="width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(230, 184, 0, 0.6);" />
       </div>
-      <div class="glass reveal reveal-delay-2" style="flex: 2; min-width: 300px; height: 300px; padding: 80px 60px;">
+      <div class="glass reveal reveal-delay-2" style="flex: 2; min-width: 300px; min-height: 300px; padding: 50px 60px; box-sizing: border-box;">
         <p style="font-size: 1.2rem;">
-          <span style="font-size: 1.2rem; font-weight: 600;">I'm a Computer Science grad student at UCSD (MS CS + MicroMBA), and I graduated Magna Cum Laude from CSUF with a BS in CS.</span><br><br>
-          <span style="font-size: 1.2rem;">I'm deeply passionate about data engineering, machine learning, and full-stack development. I love building intelligent, scalable systems that solve real-world problems—from deploying ML pipelines to crafting intuitive user interfaces. My mission is to merge data-driven insights with software craftsmanship to create technology that works smart and feels seamless.</span>
+          <span style="font-size: 1.2rem; font-weight: 600;">I'm an MS Computer Science student at UC San Diego, and I graduated Magna Cum Laude from CSUF with a BS in CS.</span><br><br>
+          <span style="font-size: 1.2rem;">I build backend systems and applied ML — LLM pipelines that translate natural language into validated SQL, horizontally scalable detection services, and compiler internals in Rust. Right now I'm an AI Engineer at 451 Degrees and a SWE intern at Thirdsight.ai, where most of my work lives at the intersection of distributed systems, testing rigor, and models that actually ship.</span>
         </p>
       </div>
     </div>
@@ -416,53 +502,53 @@ canvas { display: block; vertical-align: bottom; }
   <div class="section" id="section3" style="padding-bottom: 20px;">
     <div class="projects-grid">
 
-      <div class="project-card reveal reveal-delay-1" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('drone.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-          <h3 style="margin: 0; color: #e6b800;">Altivue</h3>
-          <p style="margin: 5px 0 10px; color: #ffffff;">AI-powered drone with YOLOv5 & RAG for safer pathing.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A smart drone that can "see" and avoid obstacles using AI.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Useful in search & rescue, agriculture, and surveillance.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> YOLOv5, Python, Computer Vision, RAG.</p>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-inner">
+          <h3>Inclarity <a href="https://inclarity.onrender.com" target="_blank" rel="noopener" class="project-link">↗ live</a></h3>
+          <p class="tagline">Full-stack INCI cosmetic ingredient normalizer.</p>
+          <p><strong>What:</strong> Maps messy cosmetic ingredient strings to canonical INCI names via exact, fuzzy (RapidFuzz), and semantic matching.</p>
+          <p><strong>Results:</strong> 99.1% accuracy with a 0.0% false-accept rate on a 114-item messy ground-truth set; ~0.03 ms average lookup.</p>
+          <p><strong>Skills:</strong> Python, Flask, RapidFuzz, JavaScript, Render.</p>
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-2" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('biomarker.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-          <h3 style="margin: 0; color: #e6b800;">Biomarker Predictor</h3>
-          <p style="margin: 5px 0 10px; color: #ffffff;">AI for neuro-cognitive decline post cardiac surgery (AUROC 0.86).</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> Predicts if a patient might develop brain issues after heart surgery.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Hospitals for post-op patient care planning.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> AUROC, Scikit-learn, Python, SHAP.</p>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-inner">
+          <h3>HubCaf <a href="https://hubcaf.com" target="_blank" rel="noopener" class="project-link">↗ live</a></h3>
+          <p class="tagline">Cafe discovery platform for remote workers.</p>
+          <p><strong>What:</strong> React 19 frontend and Express 5 API on PostgreSQL/Drizzle, with a type-safe OpenAPI + Orval layer generating shared React Query hooks and Zod schemas.</p>
+          <p><strong>Results:</strong> Shipped to real users who contribute reviews on wifi, outlets, parking, and noise.</p>
+          <p><strong>Skills:</strong> TypeScript, React, Express, PostgreSQL, Clerk, Leaflet, Tailwind.</p>
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-3" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('stocks.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-          <h3 style="margin: 0; color: #e6b800;">Stock Forecaster</h3>
-          <p style="margin: 5px 0 10px; color: #ffffff;">LSTM + XGBoost ensemble for S&P 500 trends (70% accuracy).</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A model that guesses stock market trends using AI.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Finance tools, investor dashboards.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LSTM, XGBoost, Python, Time Series.</p>
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-inner">
+          <h3>Compiler Backend</h3>
+          <p class="tagline">Register allocation &amp; garbage collection, in Rust.</p>
+          <p><strong>What:</strong> A graph-coloring register allocator mapping variables to x86-64 registers and stack slots, plus a mark-compact GC for heap-allocated vectors.</p>
+          <p><strong>Results:</strong> Correct spilling under register pressure; forwarding-address compaction with a two-word object header and enforced heap limits.</p>
+          <p><strong>Skills:</strong> Rust, x86-64, compilers, memory management.</p>
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-1" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('fractran.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-          <h3 style="margin: 0; color: #e6b800;">FRACTRAN Research</h3>
-          <p style="margin: 5px 0 10px; color: #ffffff;">Computed √2 with prime-state FRACTRAN; published on arXiv.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A math project proving irrational numbers using prime sequences.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Research labs, theoretical computing studies.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> Number theory, Math modeling, Python.</p>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-inner">
+          <h3>Biomarker Analysis</h3>
+          <p class="tagline">Neuro-cognitive decline post-cardiac surgery — Brown CBMI.</p>
+          <p><strong>What:</strong> Automated feature selection and preprocessing for clinical time-series data, with Logistic Regression and XGBoost models predicting post-op decline.</p>
+          <p><strong>Results:</strong> Cut pipeline latency 50%; SHAP explanations improved model debuggability and clinician trust.</p>
+          <p><strong>Skills:</strong> Python, XGBoost, Scikit-learn, SHAP.</p>
         </div>
       </div>
 
-      <div class="project-card reveal reveal-delay-2" style="position: relative; width: 100%; min-height: 340px; height: auto; background: url('llm.jpg') center/cover no-repeat; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.5);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 10, 0.12); width: 100%; padding: 25px; transition: all 0.3s; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-sizing: border-box; white-space: normal; word-break: break-word; overflow-wrap: break-word;">
-          <h3 style="margin: 0; color: #e6b800;">LLM Tooling (In Progress)</h3>
-          <p style="margin: 5px 0 10px; color: #ffffff;">Building interfaces and pipelines for interacting with large language models.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>What:</strong> A toolkit to integrate and experiment with LLMs efficiently.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Where:</strong> Dev platforms, AI product prototyping, GenAI experimentation.</p>
-          <p style="margin: 5px 0; color: #ffffff;"><strong>Skills:</strong> LLMs, Python, Prompt Engineering, RAG, LangChain.</p>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-inner">
+          <h3>Biomechanics of Human Motion</h3>
+          <p class="tagline">Movement analysis research — McCulloch Lab, UCSD.</p>
+          <p><strong>What:</strong> Python preprocessing pipelines extracting biomechanical markers from multi-angle video, with PCA reducing dimensionality while preserving key movement signals.</p>
+          <p><strong>Results:</strong> Benchmarked participant metrics against reference models to quantify deviations for exercise-form assessment.</p>
+          <p><strong>Skills:</strong> Python, PCA, computer vision, signal processing.</p>
         </div>
       </div>
 
@@ -472,40 +558,37 @@ canvas { display: block; vertical-align: bottom; }
   <!-- SECTION 4: SKILLS -->
   <div class="section" id="section4">
     <div class="skills-grid">
-      <span class="skill-chip reveal reveal-delay-1">JavaScript</span>
-      <span class="skill-chip reveal reveal-delay-1">TypeScript</span>
-      <span class="skill-chip reveal reveal-delay-1">Python</span>
-      <span class="skill-chip reveal reveal-delay-1">SQL</span>
+      <span class="skill-chip reveal reveal-delay-1">C</span>
       <span class="skill-chip reveal reveal-delay-1">C++</span>
-      <span class="skill-chip reveal reveal-delay-1">C#</span>
-      <span class="skill-chip reveal reveal-delay-1">R</span>
-      <span class="skill-chip reveal reveal-delay-1">Java</span>
-      <span class="skill-chip reveal reveal-delay-2">TensorFlow</span>
+      <span class="skill-chip reveal reveal-delay-1">Rust</span>
+      <span class="skill-chip reveal reveal-delay-1">Python</span>
+      <span class="skill-chip reveal reveal-delay-1">TypeScript</span>
+      <span class="skill-chip reveal reveal-delay-1">SQL</span>
       <span class="skill-chip reveal reveal-delay-2">PyTorch</span>
       <span class="skill-chip reveal reveal-delay-2">Scikit-learn</span>
-      <span class="skill-chip reveal reveal-delay-2">Keras</span>
-      <span class="skill-chip reveal reveal-delay-2">YOLOv5</span>
-      <span class="skill-chip reveal reveal-delay-2">RAG</span>
-      <span class="skill-chip reveal reveal-delay-2">LangChain</span>
-      <span class="skill-chip reveal reveal-delay-2">GPT-J</span>
-      <span class="skill-chip reveal reveal-delay-2">LLaMA</span>
-      <span class="skill-chip reveal reveal-delay-2">Mistral</span>
+      <span class="skill-chip reveal reveal-delay-2">XGBoost</span>
+      <span class="skill-chip reveal reveal-delay-2">LangGraph</span>
+      <span class="skill-chip reveal reveal-delay-2">CNNs</span>
+      <span class="skill-chip reveal reveal-delay-2">SHAP</span>
+      <span class="skill-chip reveal reveal-delay-2">Claude</span>
       <span class="skill-chip reveal reveal-delay-3">React</span>
-      <span class="skill-chip reveal reveal-delay-3">Next.js</span>
-      <span class="skill-chip reveal reveal-delay-3">Node.js</span>
+      <span class="skill-chip reveal reveal-delay-3">Express</span>
       <span class="skill-chip reveal reveal-delay-3">Flask</span>
-      <span class="skill-chip reveal reveal-delay-3">FastAPI</span>
-      <span class="skill-chip reveal reveal-delay-3">MongoDB</span>
-      <span class="skill-chip reveal reveal-delay-3">MySQL</span>
-      <span class="skill-chip reveal reveal-delay-3">.NET</span>
-      <span class="skill-chip reveal reveal-delay-4">AWS</span>
+      <span class="skill-chip reveal reveal-delay-3">PostgreSQL</span>
+      <span class="skill-chip reveal reveal-delay-3">Drizzle ORM</span>
+      <span class="skill-chip reveal reveal-delay-3">Redis</span>
+      <span class="skill-chip reveal reveal-delay-3">Tailwind</span>
       <span class="skill-chip reveal reveal-delay-4">Docker</span>
-      <span class="skill-chip reveal reveal-delay-4">Kubernetes</span>
-      <span class="skill-chip reveal reveal-delay-4">Terraform</span>
-      <span class="skill-chip reveal reveal-delay-4">GitHub Actions</span>
-      <span class="skill-chip reveal reveal-delay-4">Databricks</span>
-      <span class="skill-chip reveal reveal-delay-4">Postman</span>
+      <span class="skill-chip reveal reveal-delay-4">Railway</span>
       <span class="skill-chip reveal reveal-delay-4">Linux</span>
+      <span class="skill-chip reveal reveal-delay-4">Git/GitHub</span>
+      <span class="skill-chip reveal reveal-delay-4">Multi-threading</span>
+      <span class="skill-chip reveal reveal-delay-4">Pytest</span>
+      <span class="skill-chip reveal reveal-delay-4">Jest</span>
+      <span class="skill-chip reveal reveal-delay-4">Postman</span>
+      <span class="skill-chip reveal reveal-delay-4">Tableau</span>
+      <span class="skill-chip reveal reveal-delay-4">Plotly</span>
+      <span class="skill-chip reveal reveal-delay-4">Spark</span>
     </div>
   </div>
 
@@ -514,50 +597,46 @@ canvas { display: block; vertical-align: bottom; }
     <div class="experience-wrapper">
 
       <div class="experience-card reveal reveal-delay-1">
-        <h3 style="color: #e6b800;">LLM Prompt Optimization</h3>
+        <h3>451 Degrees</h3>
+        <p class="exp-role">AI Engineer · La Jolla, CA</p>
+        <p class="exp-date">Feb 2026 – Present</p>
         <ul>
-          <li style="color: #ffffff;"><strong>What I did:</strong> Reduced latency 15%+ across GPT-J, LLaMA using prompt compression & token efficiency strategies.</li>
-          <li style="color: #ffffff;"><strong>Skills used:</strong> Prompt Engineering, LLMs, Tokenization</li>
-          <li style="color: #ffffff;"><strong>Impact:</strong> Enabled faster GenAI response in RAG-based apps.</li>
-          <li style="color: #ffffff;"><strong>Tools:</strong> Python, GPT-J, LLaMA</li>
-          <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
-          <li style="color: #ffffff;"><strong>Timeline:</strong> Jan 2024 – Mar 2024</li>
+          <li>Architected a horizontally scalable content-detection pipeline with Redis and multi-threaded request handling, reproducing failures under high-traffic conditions.</li>
+          <li>Improved pirated-link detection 200% during live streaming events by fixing a scoring inversion bug found through confusion-matrix analysis.</li>
+          <li>Built automated coverage with Pytest and Jest plus structured logging across the pipeline.</li>
+          <li>Designed the team's foundational codebase and led sprint planning across engineering cycles.</li>
         </ul>
       </div>
 
       <div class="experience-card reveal reveal-delay-2">
-        <h3 style="color: #e6b800;">CSUF Teaching Assistant</h3>
+        <h3>Thirdsight.ai</h3>
+        <p class="exp-role">SWE Intern · La Jolla, CA</p>
+        <p class="exp-date">Jun 2025 – Present</p>
         <ul>
-          <li style="color: #ffffff;"><strong>What I did:</strong> Tutored 1,500+ students in Python & SQL. Led labs, created exam prep, and mentored capstones.</li>
-          <li style="color: #ffffff;"><strong>Skills used:</strong> Python, SQL, Teaching, Curriculum Design</li>
-          <li style="color: #ffffff;"><strong>Impact:</strong> Improved average lab scores by 12%</li>
-          <li style="color: #ffffff;"><strong>Tools:</strong> Zoom, Python, SQL IDEs</li>
-          <li style="color: #ffffff;"><strong>Environment:</strong> Academic, undergrad labs</li>
-          <li style="color: #ffffff;"><strong>Timeline:</strong> Aug 2021 – May 2023</li>
+          <li>Shipped a validation-focused backend pipeline integrating three LLM providers, verifying natural-language-to-SQL translation across 40+ scenarios.</li>
+          <li>Cut query latency with a caching layer featuring automated result validation and retry logic for ambiguous inputs.</li>
+          <li>Built end-to-end pipelines turning parsed intent into structured queries, surfacing analytics on claim profitability and formulary strategy.</li>
+          <li>Implemented CSRF and session-based auth against a Railway-hosted REST API.</li>
         </ul>
       </div>
 
       <div class="experience-card reveal reveal-delay-3">
-        <h3 style="color: #e6b800;">SoCal Research</h3>
+        <h3>Apple</h3>
+        <p class="exp-role">Retail Specialist, Product Zone · La Jolla, CA</p>
+        <p class="exp-date">Oct 2025 – Present</p>
         <ul>
-          <li style="color: #ffffff;"><strong>What I did:</strong> Predicted earthquake column drift with R² = 0.94 using ML models and regression.</li>
-          <li style="color: #ffffff;"><strong>Skills used:</strong> Python, Scikit-learn, Regression, Sensor Data</li>
-          <li style="color: #ffffff;"><strong>Impact:</strong> Boosted accuracy of seismic drift predictions by 18%</li>
-          <li style="color: #ffffff;"><strong>Tools:</strong> Jupyter, Scikit-learn, Pandas</li>
-          <li style="color: #ffffff;"><strong>Environment:</strong> Collaborative lab (6-person team)</li>
-          <li style="color: #ffffff;"><strong>Timeline:</strong> Jun 2023 – Sep 2023</li>
+          <li>Diagnosed complex iOS and macOS hardware and software issues for 20+ clients daily under strict time constraints.</li>
         </ul>
       </div>
 
       <div class="experience-card reveal reveal-delay-4">
-        <h3 style="color: #e6b800;">FRACTRAN Math Research</h3>
+        <h3>SoCal Data Science</h3>
+        <p class="exp-role">Data Science Research Intern · Irvine, CA</p>
+        <p class="exp-date">Jun 2024 – Aug 2024</p>
         <ul>
-          <li style="color: #ffffff;"><strong>What I did:</strong> Proved √2 using a prime-state FRACTRAN machine. Published findings on arXiv.</li>
-          <li style="color: #ffffff;"><strong>Skills used:</strong> Number Theory, Math Modeling, Python</li>
-          <li style="color: #ffffff;"><strong>Impact:</strong> Presented findings at World's Largest Math Conference (JMM)</li>
-          <li style="color: #ffffff;"><strong>Tools:</strong> Python, LaTeX, arXiv</li>
-          <li style="color: #ffffff;"><strong>Environment:</strong> Independent research</li>
-          <li style="color: #ffffff;"><strong>Timeline:</strong> Dec 2023 – Feb 2024</li>
+          <li>Cut pipeline runtime 40% across 10,000+ simulation frames through targeted Python/Scikit-learn performance tuning.</li>
+          <li>Fine-tuned regression models predicting structural drift and mechanical stress points, reaching R² = 0.947.</li>
+          <li>Architected automated preprocessing pipelines so distributed research teams could reproduce results consistently.</li>
         </ul>
       </div>
 

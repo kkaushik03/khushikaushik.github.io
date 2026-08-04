@@ -1,42 +1,32 @@
 # khushikaushik.github.io
 
-# Portfolio Project
+Personal portfolio site for **Khushi Kaushik** — MS Computer Science student at UC San Diego, AI engineer and backend developer.
 
-This is a portfolio project showcasing your skills and accomplishments. Follow the steps below to set up and run the project locally.
+Live at [khushikaushik.com](https://khushikaushik.com).
 
-## Getting Started
+## Contents
 
-These instructions will help you run the project on your local machine.
+Single-page site with six snap-scroll sections: intro, about, projects, skills, experience, and contact.
 
-### Prerequisites
+- `index.html` — page markup and all styles
+- `script.js` — cursor glow, typing animation, scroll reveal, navbar state, particles.js config
+- `Khushi_Kaushik_Resume.pdf` — downloadable résumé linked from the hero
+- `profile.jpg` — headshot shown in the About section
 
-Ensure you have the following installed:
+To change the headshot, replace `profile.jpg` with a new image using that exact filename. No code changes needed.
 
-- **Git**: To clone the repository. [Download Git](https://git-scm.com/)
-- **Visual Studio Code**: To open the project and use Live Server. [Download VS Code](https://code.visualstudio.com/)
+## Running locally
 
-Additionally, install the **Live Server** extension in Visual Studio Code.
+No build step — it's static HTML. Either open `index.html` directly in a browser, or serve it:
 
-### Installation
+```bash
+python3 -m http.server 8000
+```
 
-1. **Clone the Repository**
+Then visit `http://localhost:8000`.
 
-   Open your terminal and run:
-   ```bash
-   git clone <repository-url>
-   
-2.	**Navigate to the Project Directory**
-   Replace <project-directory> with the name of the folder created after cloning.
-   cd <project-directory>
-3.	**Open the Project in Visual Studio Code**
-   code .
-4.	**Install Live Server Extension**
-   Open Visual Studio Code.
-   Go to the Extensions view by clicking on the Extensions icon in the sidebar or pressing Ctrl+Shift+X.
-   Search for Live Server.
-   Click Install.
-5.	**Running the project**
-  1.	In the project folder, locate the index.html file.
-	2.	Right-click on the index.html file.
-	3.	Select Open with Live Server.
-	4.	Your default web browser will open, and the portfolio will be displayed.
+For live reload while editing, install the **Live Server** extension in VS Code, right-click `index.html`, and choose *Open with Live Server*.
+
+## Updating content
+
+Projects and experience live as `.project-card` and `.experience-card` blocks in `index.html`. Skills are `.skill-chip` spans in section 4. The rotating job titles in the hero come from the `roles` array at the top of `script.js`.
